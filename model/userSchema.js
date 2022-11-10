@@ -1,65 +1,65 @@
 const jwt =require("jsonwebtoken");
 const mongoose=require("mongoose");
 const bcrypt=require("bcryptjs");
-const ObjectId = mongoose.Types.ObjectId;
 //Creating a schema
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  phone: {
-    type: Number,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  cpassword: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-  messages: [
-    {
-      name: {
-        type: String,
-        required: true,
-      },
-      email: {
-        type: String,
-        required: true,
-      },
-      phone: {
-        type: Number,
-        required: true,
-      },
-      message: {
-        type: String,
-        required: true,
-      },
+const userSchema=new mongoose.Schema({
+    name:{
+        type:String,
+        required:true,
     },
-  ],
-  tokens: [
-    {
-      token: {
-        type: String,
-        required: true,
-      },
+    email:{
+        type:String,
+        required:true,
     },
-  ],
-  courses: {
-    type: [{ type: ObjectId, required: true }],
-  },
-});
+    phone:{
+        type:Number,
+        required:true,
+    },
+    work:{
+        type:String,
+        required:true,
+    },
+    
+    password:{
+        type:String,
+        required:true,
+    },
+    cpassword:{
+        type:String,
+        required:true,
+    },
+    date:{
+        type:Date,
+        default:Date.now
+    },
+    messages:[{
+        name:{
+            type:String,
+            required:true,
+        },
+        email:{
+            type:String,
+            required:true,
+        },
+        phone:{
+            type:Number,
+            required:true,
+        },
+         message:{
+            type:String,
+            required:true,
+        },
+      }
+    ],
+   tokens:[
+       {
+           token:{
+            type:String,
+            required:true,
+           }
+       }
+   ]  
+})
 
 
 //we are hashing the password

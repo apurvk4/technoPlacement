@@ -12,23 +12,22 @@ const Login=()=>{
 
   const loginUser= async (e)=>{
     e.preventDefault();
-    const url = process.env.REACT_APP_USER_SIGNIN;
-     const  res=await fetch(url,{
+     const  res=await fetch('/signin',{
        method:"POST",
-       credentials : "include",
        headers:{
          "Content-Type":"application/json"
         },  body:JSON.stringify({
           email,password
         })
      });
-     const data=await res.json();          // To get the pending stage data
+     const data=res.json();          // To get the pending stage data
      if(!data||res.status===400){
        window.alert("Invalid Credentials");
      }else{
        dispatch({type:"USER",payload:true})
        window.alert("Login successful");
        history.push("./");
+
      }
   }
 
@@ -53,6 +52,8 @@ const Login=()=>{
 				<div id="btn"></div>
         <NavLink to="/login" className="toggle-btn text-capitalize log " >Login </NavLink>
         <NavLink to="/signup" className="toggle-btn text-capitalize reg"  >Register</NavLink>
+        {/* <button type="button" class="toggle-btn" id="log" onclick="login()" style="color: #fff;">Log In</button>
+				<button type="button" class="toggle-btn" id="reg" onclick="register()">Register</button> */}
 		 </div>
 			
     
