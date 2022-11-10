@@ -8,21 +8,25 @@ const Logout=()=>{
 
  const history =useHistory();
     useEffect(()=>{
-    fetch("/logout",{
+    const url = process.env.REACT_APP_USER_SIGNOUT;
+    // window.alert(url)
+    fetch(url,{
         method: "GET",
+        credentials: "include",
         headers:{
          Accept:"application/json",
          "Content-Type":"application/json"
         },
-        credentials:"include"
     }).then((res)=>{
         dispatch({type:"USER", payload:false})
         history.push("/login", {replace:true});
-        if(!res.status!== 200){
+        if(!res.status!== 201){
             const error= new Error(res.error);
             throw error;
         }
     }).catch((err)=>{
+        // console.log(res.status);
+        window.alert(err.message);
         console.log(err);
     })
     });

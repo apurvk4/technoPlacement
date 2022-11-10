@@ -12,22 +12,23 @@ const Login=()=>{
 
   const loginUser= async (e)=>{
     e.preventDefault();
-     const  res=await fetch('/signin',{
+    const url = process.env.REACT_APP_USER_SIGNIN;
+     const  res=await fetch(url,{
        method:"POST",
+       credentials : "include",
        headers:{
          "Content-Type":"application/json"
         },  body:JSON.stringify({
           email,password
         })
      });
-     const data=res.json();          // To get the pending stage data
+     const data=await res.json();          // To get the pending stage data
      if(!data||res.status===400){
        window.alert("Invalid Credentials");
      }else{
        dispatch({type:"USER",payload:true})
        window.alert("Login successful");
        history.push("./");
-
      }
   }
 
