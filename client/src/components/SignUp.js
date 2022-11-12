@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import { NavLink ,useHistory} from "react-router-dom";
-import register from "../images/register.jpg";
+
 const SignUp=()=>{
   const history=useHistory();
   const [user, setUser] = useState({
@@ -37,14 +37,7 @@ const PostData = async(e)=>{
 
   return(
     <>
-    {/* <form id="register" class="input-group">
-				<input type="text" class="input-field" placeholder="Full Name" required="required">
-				<input type="email" class="input-field" placeholder="Email Address" required="required">
-				<input type="password" class="input-field" placeholder="Create Password" name="psame" required="required">
-				<input type="password" class="input-field" placeholder="Confirm Password" name="psame" required="required">
-				<input type="checkbox" class="check-box" id="chkAgree" onclick="goFurther()">I agree to the Terms & Conditions
-				<button type="submit" id="btnSubmit" class="submit-btn reg-btn">Register</button>
-			</form> */}
+    
         <div className="form-box">
         <div class="button-box">
 				<div id="btn"></div>
@@ -57,7 +50,7 @@ const PostData = async(e)=>{
                       <label  htmlFor="name">
                         <i class="zmdi zmdi-account material-icons-name "></i>
                       </label>
-                        <input type="text" name="name" id="name" autoComplete="off"
+                        <input type="text" name="name" id="name" autoComplete="off" className="input-field"
                         value={user.name}
                         onChange={handleInputs}
                         placeholder="Name"></input>
@@ -67,7 +60,7 @@ const PostData = async(e)=>{
                        <label htmlFor="email">
                          <i class="zmdi zmdi-email material-icons-name"></i>
                        </label>
-                         <input type="text" name="email" id="email" autoComplete="off"
+                         <input type="text" name="email" id="email" autoComplete="off" className="input-field"
                          value={user.email}
                          onChange={handleInputs}
                          placeholder="Email"></input>
@@ -77,7 +70,7 @@ const PostData = async(e)=>{
                        <label htmlFor="phone">
                          <i class="zmdi zmdi-phone-in-talk material-icons-name"></i>
                        </label>
-                         <input type="text" name="phone" id="phone" autoComplete="off"
+                         <input type="text" name="phone" id="phone" autoComplete="off" className="input-field"
                          value={user.phone}
                          onChange={handleInputs}
                          placeholder="enter your phoneNo"></input>
@@ -87,7 +80,7 @@ const PostData = async(e)=>{
                        <label htmlFor="password">
                          <i class="zmdi zmdi-lock material-icons-name"></i>
                        </label>
-                         <input type="text" name="password" id="password" autoComplete="off"
+                         <input type="text" name="password" id="password" autoComplete="off" className="input-field"
                          value={user.password}
                          onChange={handleInputs}
                          placeholder="enter your password"></input>
@@ -97,28 +90,21 @@ const PostData = async(e)=>{
                        <label htmlFor="cpassword">
                          <i class="zmdi zmdi-lock material-icons-name"></i>
                        </label>
-                         <input type="text" name="cpassword" id="cpassword" autoComplete="off"
+                         <input type="text" name="cpassword" id="cpassword" autoComplete="off" className="input-field"
                          value={user.cpassword}
                          onChange={handleInputs}
                          placeholder="confirm your password"></input>
                   </div>
                    
-                   <div className="inp btn form-button">
-                         <input type="submit" name="signup" id="signup" className=" form-submit text-center"
+                   <div className="inp  submit-btn">
+                         <input type="submit" name="signup" id="signup" className=" btn text-center"
                          onClick={PostData}
                          value="register"/>
                    </div>
 
              </form>
       
-                  <div className="signup-image col-lg-6 col-md-6 col-12  ">
-                       <figure className="img-fluid  ">
-                         <img  class="w-50 mb-10" src={register} alt ="Register pic"/> 
-                         </figure>
-                         <div className="image-link text-center">
-                         <NavLink to="/login" className="signup-image-link text-capitalize" >I am already registered</NavLink>
-                         </div>
-                   </div>                   
+                                    
                   
            
         
