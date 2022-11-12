@@ -50,26 +50,24 @@ useEffect(() => {
 			</div>
 		</div>
       <div className="title">
-        <span>Popular Subjects on TechnoPlacement</span>
+        <span>Popular subjects on TechnoPlacement</span>
 	    </div>
 	    <br/><br/>
 	     <div className="course">
 		   <center><div className="cbox">
-		      <div className="det"><a href="subjects/jee.html"><img src={book}/>JEE Preparation</a></div>
-		      <div className="det"><a href="subjects/gate.html"><img src={d1}/>GATE Preparation</a></div>
-		      <div className="det"><a href="subjects/jee.html#sample_papers"><img src={paper}/>Sample Papers</a></div>
-		      <div className="det"><a href="subjects/quiz.html"><img src={d1}/>Daily Quiz</a></div>
+		      <div className="det"><a href="https://www.geeksforgeeks.org/articles-on-computer-science-subjects-gq/"><img src={book}/> IT Core Subjects</a></div>
+		      <div className="det"><a href="https://www.geeksforgeeks.org/geeksforgeeks-school/?ref=shm"><img src={d1}/>Courses </a></div>
+		      <div className="det"><a href="https://www.geeksforgeeks.org/50-data-structures-mcqs-with-answers/"><img src={paper}/>MCQ</a></div>
+		      <div className="det"><a href="https://practice.geeksforgeeks.org/problem-of-the-day"><img src={d1}/>Daily Question</a></div>
 		   </div></center>
 		   <div className="cbox">
-		      <div className="det"><a href="subjects/computer_courses.html"><img src={computer}/>Computer Courses</a></div>
-		      <div className="det"><a href="subjects/computer_courses.html#data"><img src={data}/>Data Structures</a></div>
-		      <div className="det"><a href="subjects/computer_courses.html#algo"><img src={algo}/>Algorithm</a></div>
-		      <div className="det det-last"><a href="subjects/computer_courses.html#projects"><img src={projects
-          }/>Projects</a></div>
+		      <div className="det"><a href="https://www.geeksforgeeks.org/company-interview-corner/"><img src={computer}/>Interview Experience</a></div>
+		      <div className="det"><a href="https://www.geeksforgeeks.org/data-structures/?ref=shm"><img src={data}/>Data Structures</a></div>
+		      <div className="det"><a href="https://www.geeksforgeeks.org/fundamentals-of-algorithms/?ref=shm"><img src={algo}/>Algorithms</a></div>
+		      <div className="det det-last"><a href="https://www.geeksforgeeks.org/computer-science-projects/?ref=sh"><img src={projects}/>Project Ideas</a></div>
 		    </div>
 	 </div>
-   
-   
+
    <div className="Contact-page">
     <Contact/>
    </div>
