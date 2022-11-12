@@ -1,0 +1,63 @@
+.MenuContainer123 {
+    position: absolute;
+    min-width: 197.8px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    z-index: 1;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px -7px #000;
+  }
+  @media screen and (max-width: 980px) {
+    .MenuContainer {
+      right: 10%;
+    }
+  }
+  .flexContainer123 {
+    display: flex;
+    height: inherit;
+    width: inherit;
+  }
+  .row123 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: inherit;
+    width: inherit;
+  }
+  .col-container123 {
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    height: inherit;
+  }
+  .col123 {
+    display: flex;
+    flex-direction: column;
+  }
+  .col-items123 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 16px;
+  }
+  .col123 :first-child {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+  .col123 :last-child {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  .col-items123:hover {
+    background-color: #eff3f4;
+  }
+  .col-items123 > button {
+    all: unset;
+  }
+  .col-items123 > button > svg {
+    padding-right: 12px;
+  }
+  .col-items123 > button > span {
+    width: 100%;
+  }
+  
