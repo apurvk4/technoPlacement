@@ -1,4 +1,6 @@
 import React,{useState,useEffect} from "react";
+import AddCourse from "./AddCourse";
+import Modal from "./Modal";
 import Footer from "./Footer";
 import Contact from "./Contact";
 import algo from "../images/algo.png";
@@ -13,6 +15,8 @@ import projects from "../images/projects.png";
 const Home=()=>{
    const [show, setShow] = useState(false);
   const [userName, setUserName]= useState('');
+  const [modal, setModal] = useState(false);
+
   const userHomePage= async()=>{
   
    try{
@@ -30,13 +34,39 @@ const Home=()=>{
      console.log(e);
    }
  };
+ function close() {
+   setModal(false);
+ }
 useEffect(() => {
   userHomePage();
   
 },[]);
 
-  return(
+  return (
     <>
+      <div className="home-page  ">
+        <div className="home-div text-capitalize text-center">
+          <p className="pt-5">WELCOME</p>
+          <h1>{userName}</h1>
+          <h2>
+            {show ? "Happy To See You Back" : "WE ARE THE MERN DEVELOPERS"}
+          </h2>
+          <button
+            onClick={() => {
+              setModal(!modal);
+            }}
+          >
+            Toggle Modal
+          </button>
+        </div>
+      </div>
+      {modal ? (
+        <Modal outsideclick="allow" darken={false} close={close}>
+          <AddCourse />
+        </Modal>
+      ) : (
+        " "
+      )}
        <div className="head-container">
 			<div className="quote">
 				<p>The beautiful thing about learning is that nobody can take it away from you</p>
