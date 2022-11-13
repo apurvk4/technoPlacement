@@ -10,6 +10,7 @@ import "./App.css";
 import ErrorPage from "./components/ErrorPage";
 import Logout from "./components/Logout";
 import { initialState,reducer } from "./reducer/useReducer";
+import Coding from "./components/Coding";
 
  //context Api
  export const UserContext=createContext();
@@ -45,6 +46,10 @@ const App=()=>{
 
       <Route exact path="/logout">
        <Logout />
+      </Route>
+
+      <Route exact path="/coding">
+       <Coding />
       </Route>
       
      

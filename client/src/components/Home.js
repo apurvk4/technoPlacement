@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from "react";
 import AddCourse from "./AddCourse";
+import Coding from "./Coding";
 import Modal from "./Modal";
 import Footer from "./Footer";
 import Contact from "./Contact";
@@ -11,6 +12,7 @@ import computer from "../images/computer.png";
 import data from "../images/data.png";
 import paper from "../images/paper.png";
 import projects from "../images/projects.png";
+import Categories from "./Categories";
 
 const Home=()=>{
    const [show, setShow] = useState(false);
@@ -44,7 +46,8 @@ useEffect(() => {
 
   return (
     <>
-      <div className="home-page  ">
+    
+      <div className="home-page">
         <div className="home-div text-capitalize text-center">
           <p className="pt-5">WELCOME</p>
           <h1>{userName}</h1>
@@ -66,7 +69,7 @@ useEffect(() => {
         </Modal>
       ) : (
         " "
-      )}
+ )}
        <div className="head-container">
 			<div className="quote">
 				<p>The beautiful thing about learning is that nobody can take it away from you</p>
@@ -97,8 +100,9 @@ useEffect(() => {
 		      <div className="det det-last"><a href="https://www.geeksforgeeks.org/computer-science-projects/?ref=sh"><img src={projects}/>Project Ideas</a></div>
 		    </div>
 	 </div>
-
-   <div className="Contact-page">
+      
+      <Categories/>
+   <div className="Contact-page" style={{marginBottom:"100px"}}>
     <Contact/>
    </div>
    <Footer/>        
