@@ -4,61 +4,67 @@ const bcrypt=require("bcryptjs");
 const ObjectId = mongoose.Types.ObjectId;
 //Creating a schema
 const userSchema = new mongoose.Schema({
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    phone: {
-      type: Number,
-      required: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    cpassword: {
-      type: String,
-      required: true,
-    },
-    date: {
-      type: Date,
-      default: Date.now,
-    },
-    messages: [
-      {
-        name: {
-          type: String,
-          required: true,
-        },
-        email: {
-          type: String,
-          required: true,
-        },
-        phone: {
-          type: Number,
-          required: true,
-        },
-        message: {
-          type: String,
-          required: true,
-        },
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: Number,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  cpassword: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  messages: [
+    {
+      name: {
+        type: String,
+        required: true,
       },
-    ],
-    tokens: [
-      {
-        token: {
-          type: String,
-          required: true,
-        },
+      email: {
+        type: String,
+        required: true,
+      },
+      phone: {
+        type: Number,
+        required: true,
+      },
+      message: {
+        type: String,
+        required: true,
+      },
     },
-],
-courses: {
-  type: [{ type: ObjectId, required: true }],
-},
+  ],
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  courses: {
+    type: [{ type: ObjectId, required: true }],
+  },
+  solved: [
+    {
+      type: ObjectId,
+      required: true,
+    },
+  ],
 });
 //it is the middleware between req.body and save method
 userSchema.pre("save",async function(next){                       //pre method(before save function, what to implement)
