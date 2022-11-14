@@ -25,7 +25,9 @@ const PostData = async(e)=>{
    }); 
 
    const data = await res.json();
-   if(data.status === 422|| !data){
+   console.log(data);       // To get the pending stage data
+   console.log(res.status); 
+   if(res.status === 422|| !data){
      window.alert("Invalid Registration");
      console.log("Invalid Registration");
    }else{

@@ -64,7 +64,7 @@ useEffect(() => {
         </div>
       </div>
       {modal ? (
-        <Modal outsideclick="allow" darken={false} close={close}>
+        <Modal outsideclick="notallow" darken={true} close={close}>
           <AddCourse />
         </Modal>
       ) : (
@@ -81,6 +81,7 @@ useEffect(() => {
 			<div className="svg-image">
 				<img src={home1} alt="svg"/>
 			</div>
+      <Categories/>
 		</div>
       <div className="title">
         <span>Popular subjects on TechnoPlacement</span>
@@ -101,7 +102,7 @@ useEffect(() => {
 		    </div>
 	 </div>
       
-      <Categories/>
+  
    <div className="Contact-page" style={{marginBottom:"100px"}}>
     <Contact/>
    </div>

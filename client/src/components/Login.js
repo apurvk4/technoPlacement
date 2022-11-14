@@ -20,7 +20,8 @@ const Login=()=>{
           email,password
         })
      });
-     const data=res.json();          // To get the pending stage data
+     const data= await res.json();   
+       
      if(!data||res.status===400){
        window.alert("Invalid Credentials");
      }else{

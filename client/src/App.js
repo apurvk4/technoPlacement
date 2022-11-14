@@ -11,6 +11,7 @@ import ErrorPage from "./components/ErrorPage";
 import Logout from "./components/Logout";
 import { initialState,reducer } from "./reducer/useReducer";
 import Coding from "./components/Coding";
+import Article from "./components/Article";
 
  //context Api
  export const UserContext=createContext();
@@ -34,6 +35,10 @@ const App=()=>{
 
       <Route exact path="/contact">
        <Contact/>
+      </Route>
+
+      <Route exact path="/article">
+       <Article/>
       </Route>
        
       <Route  exact path="/login">

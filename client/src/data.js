@@ -22,3 +22,33 @@ export const categories=[
     },
 
 ];
+
+export const ques=[
+    {
+      name:"sum of array elements",
+      courseType:"Coding",
+      CodingLinks:[
+        {
+            link:"https://practice.geeksforgeeks.org/problems.sum-of-array-elements2502/1"
+        },
+      ],
+      author:"id of admin adding this question",
+      tags:[
+        "Array","Sum"
+      ]
+   },
+   {
+    name:"Product of array",
+    courseType:"Coding",
+    CodingLinks:[
+      {
+          link:"https://practice.geeksforgeeks.org/problems.sum-of-array-elements2502/1"
+      },
+    ],
+    author:"id of admin adding this question",
+    tags:[
+      "Array","Product"
+    ]
+ }
+
+];
