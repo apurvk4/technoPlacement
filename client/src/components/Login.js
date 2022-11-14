@@ -12,13 +12,15 @@ const Login=()=>{
 
   const loginUser= async (e)=>{
     e.preventDefault();
-     const  res=await fetch('/signin',{
-       method:"POST",
-       headers:{
-         "Content-Type":"application/json"
-        },  body:JSON.stringify({
-          email,password
-        })
+     const res = await fetch(process.env.REACT_APP_USER_SIGNIN, {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify({
+         email,
+         password,
+       }),
      });
      const data= await res.json();   
        

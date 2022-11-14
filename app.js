@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 const userRoutes = require("./router/user");
 const adminRouter = require("./router/admin");
 const courseRouter = require("./router/course");
+const handleError = require("./handleError");
+const Feedback = require("./model/feedbackSchema");
 function corsMiddleWare(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.removeHeader("X-powered-by");
@@ -22,6 +24,31 @@ app.use(cookieParser());
 app.use(corsMiddleWare);
 require("./db/conn");
 app.use(express.json()); //middleware to understand json format for our application
+app.post("/api/feedback", async (req, res) => {
+  try {
+    let { name, email, phone, message } = req.body;
+    if (
+      !name ||
+      name == "" ||
+      !email ||
+      email == "" ||
+      !phone ||
+      phone == "" ||
+      !message ||
+      message == ""
+    ) {
+      res.status(422).send({
+        message: "invalid message.Either feilds not present or empty",
+      });
+      return;
+    }
+    const feedback = new Feedback({ name, email, phone, message });
+    await feedback.save();
+    res.status(201).send({ message: "message sent successfully" });
+  } catch (err) {
+    res.status(400).send(handleError(err));
+  }
+});
 app.use("/api/user", userRoutes); //we link the router files to our route easy
 app.use("/api/admin", adminRouter);
 app.use("/api/course", courseRouter);
@@ -39,13 +66,6 @@ const PORT = process.env.PORT || 5500;
 // app.get("/signin",(req,res)=>{
 //     res.send(`Hello login world from the the signin page`);
 // });
-app.get("/signup", (req, res) => {
-    res.send(`Hello registration world from the server`);
-  });
-
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-  }
   app.listen(PORT, () => {
     console.log(`server is listening at port no ${PORT}`);
   });

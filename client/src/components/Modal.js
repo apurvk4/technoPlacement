@@ -1,21 +1,7 @@
 import { Component } from "react";
 import dom from "react-dom";
 const modalRoot = document.getElementById("modal-root");
-// function disableScroll() {
-//   // Get the current page scroll position
-//   if(typeof window != "undefined"){}
-//   let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-//   let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
 
-//       // if any scroll is attempted, set this to the previous value
-//       window.onscroll = function() {
-//         window.scrollTo(scrollLeft, scrollTop);
-//     };
-// }
-
-// function enableScroll() {
-//   window.onscroll = function() {};
-// }
 export default class Modal extends Component {
   constructor(props) {
     super(props);
@@ -36,6 +22,7 @@ export default class Modal extends Component {
         e.stopPropagation();
       });
     }
+    document.getElementById("root").classList.add("disable-scroll");
   }
   componentDidUpdate() {
     if (this.props.darken) {
@@ -51,13 +38,29 @@ export default class Modal extends Component {
         this.props.close();
       }
     });
-    // enableScroll();
+    document.getElementById("root").classList.remove("disable-scroll");
   }
   render() {
     return dom.createPortal(
       <div className="container0">
-        <div className="container">
-          <div>{this.props.children}</div>
+        <div className="container" style={{ padding: "0px" }}>
+          <div className="modal-top">
+            <button className="modal-close" onClick={this.props.close}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-x"
+                viewBox="0 0 16 16"
+              >
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+              </svg>
+            </button>
+          </div>
+          <div style={{ paddingLeft: "12px", paddingRight: "12px" }}>
+            {this.props.children}
+          </div>
         </div>
       </div>,
       this.el

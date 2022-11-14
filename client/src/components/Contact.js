@@ -43,25 +43,27 @@ const Contact=()=>{
 
   const contactForm=async(e)=>{
     e.preventDefault();
-console.log("contanct page me aagya");
-    const {name,email,phone,message}=userData;
-     const res= await fetch("/contact",{
-       method:"POST",
-       headers:{
-         "Content-Type":"application/json",
-       },
-       body:JSON.stringify({
-           name,email,phone,message
-       })
-     });
-     const data= await res.json();
-
-     if(!data){
-       console.log("message not sent");
-     }else{
-       alert("message sent sucessfully");
-       setUserData({...userData,message:""});
-     }
+    const { name, email, phone, message } = userData;
+    const res = await fetch(process.env.REACT_APP_FEEDBACK, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        phone,
+        message,
+      }),
+    });
+    if (res.status === 400 || res.status === 422) {
+      const data = await res.json();
+      console.log("message not sent");
+      alert(data.message);
+    } else if (res.status === 201) {
+      alert("message sent sucessfully");
+      setUserData({ name: "", email: "", phone: "", message: "" });
+    }
 
 
   }
