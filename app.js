@@ -7,6 +7,7 @@ const adminRouter = require("./router/admin");
 const courseRouter = require("./router/course");
 const handleError = require("./handleError");
 const Feedback = require("./model/feedbackSchema");
+
 function corsMiddleWare(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.removeHeader("X-powered-by");
