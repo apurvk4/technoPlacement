@@ -6,11 +6,14 @@ import Coding from './Coding';
 const  Category=({item})=> {
   return (
     <>
-    
-   <a> <div className="s-card"><img src={item.img}/><p>{item.title}</p></div></a>
-  
+      <Link to={"/" + item.route}>
+        <div className="s-card">
+          <img src={item.img} />
+          <p>{item.title}</p>
+        </div>
+      </Link>
     </>
-  )
+  );
 }
 
 export default Category;

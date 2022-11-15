@@ -1,11 +1,10 @@
 import React,{useEffect,useState} from "react";
-import  {useHistory} from "react-router-dom";
+// import  {useHistory} from "react-router-dom";
 import aboutpic from "../images/login.png";
 import ranupic from "../images/login.png";
 const About=()=>{
  const [userData, setUserData]= useState({});
   console.log("call about page me aaagayyaa");
- const history=useHistory();
    const callAboutPage= async()=>{
     
      try{
@@ -28,7 +27,6 @@ const About=()=>{
 
      }catch(e){
        console.log(e);
-       history.push("/login");
      }
    };
   useEffect(() => {

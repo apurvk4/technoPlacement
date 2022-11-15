@@ -136,7 +136,7 @@ html {
 .feedbox {
   margin-top: 50px;
   width: 100%;
-  height: 600px;
+  height: 660px;
   display: flex;
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)),
     url("./images/b4.jpg");
@@ -1049,4 +1049,8 @@ span {
 .remove-tag {
   cursor: pointer;
   margin-left: 5px;
+}
+[data-invalid="true"]{
+  border:1px solid red !important;
+  color:red !important;
 }

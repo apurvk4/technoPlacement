@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const SignUp = () => {
-  const history = useHistory();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -41,7 +40,6 @@ const SignUp = () => {
     } else {
       window.alert("Registration Successful");
       console.log("Registration Successful");
-      history.push("/login");
     }
   };
 

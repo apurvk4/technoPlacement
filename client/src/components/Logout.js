@@ -1,13 +1,10 @@
-import React, { useEffect,useContext } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useContext } from "react";
 import { UserContext } from "../App";
 
+const Logout = () => {
+  const { state, dispatch } = useContext(UserContext);
 
-const Logout=()=>{
- const {state,dispatch}=useContext(UserContext);
-
- const history =useHistory();
-    useEffect(()=>{
+  useEffect(() => {
     fetch(process.env.REACT_APP_USER_SIGNOUT, {
       method: "GET",
       headers: {
@@ -18,7 +15,6 @@ const Logout=()=>{
     })
       .then((res) => {
         dispatch({ type: "USER", payload: false });
-        history.push("/login", { replace: true });
         if (!res.status !== 200) {
           const error = new Error(res.error);
           throw error;
@@ -27,12 +23,12 @@ const Logout=()=>{
       .catch((err) => {
         console.log(err);
       });
-    });
+  });
 
-    return(
-        <> 
-        <h1>Logout ka page</h1>
-        </>
-    )
+  return (
+    <>
+      <h1>Logout ka page</h1>
+    </>
+  );
 };
 export default Logout;
