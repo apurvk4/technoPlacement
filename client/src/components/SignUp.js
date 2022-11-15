@@ -10,6 +10,7 @@ const SignUp = () => {
     password: "",
     cpassword: "",
   });
+
   let name, value;
   const handleInputs = (e) => {
     console.log(e);
@@ -17,7 +18,7 @@ const SignUp = () => {
     value = e.target.value;
 
     setUser({ ...user, [name]: value });
-  };
+ };
 
   const PostData = async (e) => {
     e.preventDefault();
@@ -45,16 +46,18 @@ const SignUp = () => {
 
   return (
     <>
+    <div className="bodyPage">
       <div className="form-box">
-        <div class="button-box">
-          <div id="btn"></div>
-          <NavLink to="/login" className="toggle-btn text-capitalize log ">
-            Login{" "}
-          </NavLink>
-          <NavLink to="/signup" className="toggle-btn text-capitalize reg">
-            Register
-          </NavLink>
-        </div>
+      <ul className="nav nav-tabs "  style={{marginTop:"35px", display:"flex",justifyContent:"center",alignItems:"center"}} role="tablist">
+                   <li className="nav-item">
+                     <NavLink to="/login"> <a className="nav-link " id="login-tab" data-toggle="tab" href="#login" role="tab">Login</a></NavLink>
+                   </li>
+                   <li className="nav-item">
+                     <a className="nav-link active" id="signup-tab" data-toggle="tab" href="#signup" role="tab">Register</a>
+                   </li>
+
+               </ul>
+        <div class="tab-pane fade show active" id="signup" role="tabpanel" aria-labelledby="signup-tab">
 
         <form method="POST" className="input-group" id="register-form">
           <div className="inp">
@@ -101,7 +104,7 @@ const SignUp = () => {
               className="input-field"
               value={user.phone}
               onChange={handleInputs}
-              placeholder="enter your phoneNo"
+              placeholder="Phone No"
             ></input>
           </div>
 
@@ -117,7 +120,7 @@ const SignUp = () => {
               className="input-field"
               value={user.password}
               onChange={handleInputs}
-              placeholder="enter your password"
+              placeholder="Password"
             ></input>
           </div>
 
@@ -133,7 +136,7 @@ const SignUp = () => {
               className="input-field"
               value={user.cpassword}
               onChange={handleInputs}
-              placeholder="confirm your password"
+              placeholder="Confirm Password"
             ></input>
           </div>
 
@@ -144,10 +147,12 @@ const SignUp = () => {
               id="signup"
               className=" btn text-center"
               onClick={PostData}
-              value="register"
+              value="Register"
             />
           </div>
         </form>
+      </div>
+      </div>
       </div>
     </>
   );

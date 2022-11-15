@@ -9,6 +9,9 @@ const Coding=()=> {
      <Headers/>
        <div className='container-inner'>
         <div className='filters'>
+        <div className='search-name'>
+			<h2>  Search Tags</h2>
+		</div>
         <div className="srch">
             <input type="text"
              className="search"

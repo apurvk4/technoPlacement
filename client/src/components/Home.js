@@ -149,7 +149,6 @@ const Home = () => {
         </div>
       </div>
 
-      <Categories />
       <div className="Contact-page" style={{ marginBottom: "100px" }}>
         <Contact />
       </div>

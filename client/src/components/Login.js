@@ -1,6 +1,6 @@
 import React, { useState,useContext } from "react";
 import { NavLink } from "react-router-dom";
-import login from "../images/login.png";
+import google from "../images/google.png";
 import { UserContext } from "../App";
 
 const Login = () => {
@@ -32,30 +32,17 @@ const Login = () => {
 
   return (
     <>
-      {/*
-			<div class="other" id="other">
-				<div class="instead">
-					<h3>or</h3>
-				</div>
-				<button class="connect" onclick="google()">
-					<img src="images/icon/google.png"><span>Sign in with Google</span>
-				</button>
-			</div>
-     */}
-
+      <div className="bodyPage">
       <div className="form-box">
-        <div class="button-box">
-          <div id="btn"></div>
-          <NavLink to="/login" className="toggle-btn text-capitalize log ">
-            Login{" "}
-          </NavLink>
-          <NavLink to="/signup" className="toggle-btn text-capitalize reg">
-            Register
-          </NavLink>
-          {/* <button type="button" class="toggle-btn" id="log" onclick="login()" style="color: #fff;">Log In</button>
-				<button type="button" class="toggle-btn" id="reg" onclick="register()">Register</button> */}
-        </div>
-
+          <ul className="nav nav-tabs "  style={{marginTop:"35px", display:"flex",justifyContent:"center",alignItems:"center"}} role="tablist">
+                   <li className="nav-item" >
+                   <a className="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab">Login</a>
+                   </li>
+                   <li className="nav-item" >
+                  <NavLink to="/signup"><a className="nav-link" id="signup-tab" data-toggle="tab" href="#signup" role="tab">Register</a></NavLink> 
+                   </li>
+               </ul>
+        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="home-tab">
         <form method="POST" className="input-group" id="register-form">
           <div className="inp">
             <label htmlFor="email">
@@ -101,13 +88,17 @@ const Login = () => {
         </form>
 
         <div className="other" id="other">
-          <div className="instead">
-            <h3>or</h3>
-          </div>
-          <button className="connect" onclick="google()">
-            <span>Sign in with Google</span>
-          </button>
-        </div>
+				<div className="instead">
+					<h3>or</h3>
+				</div>
+				<button className="connect" onclick="google()">
+					<img src={google}/><span>Sign in with Google</span>
+				</button>
+			</div>
+    
+      </div>
+      
+      </div>
       </div>
     </>
   );

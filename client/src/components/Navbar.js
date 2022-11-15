@@ -49,8 +49,8 @@ const Navbar=()=>{
   return(
     <>  
               
-  <nav className="navbar w-5 navbar-expand-lg navbar-light bg-light">
-  <NavLink className="navbar-brand " to="/#">MERN STACK</NavLink>
+  <nav className="navbar active header1 w-5 navbar-expand-lg navbar-light bg-light">
+  <NavLink className="navbar-brand " to="/#">TechnoPlacement</NavLink>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
