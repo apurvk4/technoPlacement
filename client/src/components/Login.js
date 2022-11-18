@@ -28,7 +28,7 @@ const Login = () => {
       dispatch({ type: "USER", payload: true });
       window.alert("Login successful");
     }
-  };
+  }; 
 
   return (
     <>
