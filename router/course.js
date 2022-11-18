@@ -20,17 +20,6 @@ function verifyCodingCourse(req) {
   if (!("details" in req.body)) {
     return { status: false, message: "details are needed !!" };
   }
-  if (!("codingExample" in req.body)) {
-    return { status: false, message: "codingExamples are needed !!" };
-  } else if (
-    !Array.isArray(req.body["codingExample"]) &&
-    req.body["codingExample"].length > 0
-  ) {
-    return {
-      status: false,
-      message: "atleast one codingExamples are needed!!",
-    };
-  }
   if (!("codingLinks" in req.body)) {
     return { status: false, message: "codingLinks are needed !!" };
   } else if (
@@ -83,11 +72,13 @@ function verifyMcqCourse(req) {
   }
   if (!("tags" in req.body)) {
     return { status: false, message: "tags are needed !!" };
-  } else if (!Array.isArray(req.body["tags"]) && req.body["tags"].length > 0) {
+  } else if (!Array.isArray(req.body["tags"])) {
+    return { status: false, message: "invalid tags" };
+  } else if (Array.isArray(req.body["tags"]) && req.body["tags"].length == 0) {
     return { status: false, message: "atleast one tags are needed!!" };
   }
   if (!("mcqs" in req.body)) {
-    return { status: false, message: "tags are needed !!" };
+    return { status: false, message: "mcqs are needed !!" };
   } else if (!Array.isArray(req.body["mcqs"]) && req.body["mcqs"].length > 0) {
     return { status: false, message: "atleast one mcqs are needed!!" };
   }
@@ -96,31 +87,45 @@ function verifyMcqCourse(req) {
   };
 }
 
-router.get("/all", async (req, res) => {
+router.get("/all/:type", async (req, res) => {
   try {
+    let type = req.params.type;
+    const filterQuery = {};
+    switch (type) {
+      case "coding":
+        filterQuery["courseType"] = "Coding";
+        break;
+      case "article":
+        filterQuery["courseType"] = "Article";
+        break;
+      case "mcq":
+        filterQuery["courseType"] = "Mcq";
+        break;
+      default:
+        res.status(400).send({ message: "invalid course type" });
+        return;
+    }
     let limit = 5;
+    let skip = 0;
     if (req.query.limit) {
       let l = Number.parseInt(req.query.limit);
       if (Number.isInteger(l)) {
         limit = l;
       }
     }
-    const filterQuery = {};
-    if (req.query.next) {
-      filterQuery.createdAt = {
-        $lt: new Date(req.query.next),
-      };
+    if (req.query.skip) {
+      let s = Number.parseInt(req.query.skip);
+      if (Number.isInteger(s)) {
+        skip = s;
+      }
     }
-    let items = await Course.find(filterQuery)
-      .sort({
-        createdAt: -1,
-      })
-      .limit(limit);
-    let next = null;
-    if (items.length > 0) {
-      next = items[items.length - 1]["createdAt"];
-    }
-    res.status(200).send({ items, next });
+    let items = await Course.aggregate([
+      { $sort: { date: -1 } },
+      { $match: filterQuery },
+      { $skip: skip },
+      { $limit: limit },
+    ]);
+    res.status(200).send({ items });
   } catch (err) {
     res.status(400).send(handleError(err));
   }
@@ -151,8 +156,8 @@ router.get("/join/:cid", authenticateUser, async (req, res) => {
   }
 });
 
-router.post("/add", authenticateAdmin, async (req, res) => {
-  // req.adminID = ObjectId("6353dd7f92ed75bc0e6f5a22");
+router.post("/add", async (req, res) => {
+  req.adminID = ObjectId("6353dd7f92ed75bc0e6f5a22");
   try {
     let ans = verifyArticleCourse(req);
     if (!ans.status) {
@@ -210,7 +215,6 @@ router.post("/add", authenticateAdmin, async (req, res) => {
           courseType: req.body.courseType,
           tags: req.body.tags,
           author: req.adminID,
-          codingExample: req.body.codingExample,
           codingLinks: req.body.codingLinks,
           details: req.body.details,
         };
@@ -285,7 +289,6 @@ router.patch("/update/:cid", authenticateAdmin, async (req, res) => {
           courseType: req.body.courseType,
           tags: req.body.tags,
           author: req.adminID,
-          codingExample: req.body.codingExample,
           codingLinks: req.body.codingLinks,
           details: req.body.details,
         };

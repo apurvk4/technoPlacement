@@ -1,5 +1,6 @@
+import { PromiseProvider } from "mongoose";
 import { useState, useRef } from "react";
-function codingCourse() {
+function codingCourse(details, links, setDetails, setLinks) {
   return (
     <>
       <div style={{ marginBottom: "1rem" }}>
@@ -11,6 +12,12 @@ function codingCourse() {
           className="form-control"
           id="details"
           aria-describedby="nameHelp"
+          value={details}
+          onInput={(e) => {
+            if (details !== e.target.value) {
+              setDetails(e.target.value);
+            }
+          }}
         />
         <small id="nameHelp" className="form-text text-muted">
           Detailed Explaination of the Question
@@ -25,6 +32,11 @@ function codingCourse() {
           className="form-control"
           id="link1"
           aria-describedby="qlink1"
+          onBlur={(e) => {
+            if (links[0] !== e.target.value) {
+              setLinks([e.target.value, links[1]]);
+            }
+          }}
         />
         <small id="qlink1" class="form-text text-muted">
           Enter the first Link of the question
@@ -39,6 +51,11 @@ function codingCourse() {
           className="form-control"
           id="link2"
           aria-describedby="qlink2"
+          onBlur={(e) => {
+            if (links[1] !== e.target.value) {
+              setLinks([links[0], e.target.value]);
+            }
+          }}
         />
         <small id="qlink2" className="form-text text-muted">
           Enter the second Link of the question
@@ -47,7 +64,7 @@ function codingCourse() {
     </>
   );
 }
-function articleCourse() {
+function articleCourse(body, setBody) {
   return (
     <>
       <div style={{ marginBottom: "1rem" }}>
@@ -59,6 +76,12 @@ function articleCourse() {
           className="form-control"
           id="articleBody"
           aria-describedby="article"
+          value={body}
+          onInput={(e) => {
+            if (body !== e.target.value) {
+              setBody(e.target.value);
+            }
+          }}
         />
         <small id="article" className="form-text text-muted">
           Body of the article
@@ -242,39 +265,22 @@ function McqCourse(len, removeQ, mcq) {
   }
   return l;
 }
-const AddCourse = () => {
+const AddCourse = (props) => {
   const [courseType, setcourseType] = useState(null);
-  const [filled, setFilled] = useState(false);
   const [tags, setTags] = useState([]);
   const tagInp = useRef(null);
   const [mcq, setMcq] = useState([{}]);
-  function updateType(e) {
-    // console.log(e.target.value);
-    switch (e.target.value) {
-      case "Coding":
-        setcourseType(e.target.value);
-        break;
-      case "Article":
-        setcourseType(e.target.value);
-        break;
-      case "Mcq":
-        setcourseType(e.target.value);
-        break;
-      default:
-        break;
-    }
-  }
-  function removeMcq(index) {
-    if (mcq.length > 1) {
-      setMcq(mcq.filter((m, i) => i !== index));
-    }
-  }
+  const [cname, setcname] = useState("");
+  const [details, setDetails] = useState("");
+  const [links, setLinks] = useState(["", ""]);
+  const [body, setBody] = useState("");
+
   function displayForm() {
     switch (courseType) {
       case "Coding":
-        return codingCourse();
+        return codingCourse(details, links, setDetails, setLinks);
       case "Article":
-        return articleCourse();
+        return articleCourse(body, setBody);
       case "Mcq":
         let l = McqCourse(mcq.length, removeMcq, mcq);
         let btn = (
@@ -302,6 +308,189 @@ const AddCourse = () => {
         break;
     }
   }
+  function updateType(e) {
+    // console.log(e.target.value);
+    switch (e.target.value) {
+      case "Coding":
+        setcourseType(e.target.value);
+        break;
+      case "Article":
+        setcourseType(e.target.value);
+        break;
+      case "Mcq":
+        setcourseType(e.target.value);
+        break;
+      default:
+        break;
+    }
+  }
+  function removeMcq(index) {
+    if (mcq.length > 1) {
+      setMcq(mcq.filter((m, i) => i !== index));
+    }
+  }
+  function verifyMcq() {
+    let res = true;
+    let index = -1;
+    let prop = "";
+    for (let i = 0; i < mcq.length; i++) {
+      let q = mcq[i];
+      if (!("question" in q) || q["question"].trim().length === 0) {
+        res = false;
+        index = i;
+        prop = "question";
+        break;
+      }
+      if (!("option1" in q) || q["option1"].trim().length === 0) {
+        res = false;
+        index = i;
+        prop = "option1";
+        break;
+      }
+      if (!("option2" in q) || q["option2"].trim().length === 0) {
+        res = false;
+        index = i;
+        prop = "option2";
+        break;
+      }
+      if (!("option3" in q) || q["option3"].trim().length === 0) {
+        res = false;
+        index = i;
+        prop = "option3";
+        break;
+      }
+      if (!("option4" in q) || q["option4"].trim().length === 0) {
+        res = false;
+        index = i;
+        prop = "option4";
+        break;
+      }
+      if (!("answer" in q) || q["answer"].trim().length === 0) {
+        res = false;
+        index = i;
+        prop = "answer";
+        break;
+      }
+    }
+    if (res) {
+      return { status: true };
+    }
+    return { status: false, index, prop };
+  }
+  function verifyArticle() {
+    if (body === "" || body.trim().length === 0) {
+      return { status: false, prop: "body" };
+    }
+    return { status: true };
+  }
+  function verifyCoding() {
+    if (details === "" || details.trim().length === 0) {
+      return { status: false, prop: "details" };
+    }
+    if (links.length < 2) {
+      return { status: false, prop: "question urls" };
+    }
+    let re =
+      /^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
+    if (!links[0].match(re)) {
+      return { status: false, prop: "question url 1" };
+    }
+    if (!links[1].match(re)) {
+      return { status: false, prop: "question url 2" };
+    }
+    return { status: true };
+  }
+  function verifyFields() {
+    if (cname === "" || cname.trim().length === 0) {
+      return "course name needs to filled";
+    }
+    if (!courseType) {
+      return "need to select a course type";
+    }
+    if (tags.length === 0) {
+      return "atleast one tag needs to be added";
+    }
+    switch (courseType) {
+      case "Coding":
+        let res = verifyCoding();
+        if (res.status) {
+          return true;
+        }
+        return res.prop + " feild needs to be filled properly";
+      case "Article":
+        let res1 = verifyArticle();
+        if (res1.status) {
+          return true;
+        }
+        return res1.prop + " feild needs to be filled";
+      case "Mcq":
+        let res2 = verifyMcq();
+        if (res2.status) {
+          return true;
+        }
+        let i = res2.index + 1;
+        return (
+          res2.prop + " feild of question number " + i + " needs to filled"
+        );
+      default:
+        return "unknown error";
+    }
+  }
+  async function submitForm() {
+    let res = verifyFields();
+    if (typeof res === "boolean" && res) {
+      let feilds = {};
+      switch (courseType) {
+        case "Coding":
+          feilds = {
+            name: cname,
+            courseType,
+            tags,
+            codingLinks: [{ link: links[0] }, { link: links[1] }],
+            details,
+          };
+          break;
+        case "Article":
+          feilds = {
+            name: cname,
+            courseType,
+            tags,
+            articleBody: body,
+          };
+          break;
+        case "Mcq":
+          feilds = {
+            name: cname,
+            courseType,
+            tags,
+            mcqs: mcq,
+          };
+          break;
+        default:
+          alert("invalid courseType");
+          return;
+      }
+      const res = await fetch(process.env.REACT_APP_ADD_COURSE, {
+        credentials: "include",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(feilds),
+      });
+      if (res.status === 201) {
+        alert("course added successfully");
+        props.close();
+      } else {
+        let value = await res.json();
+        alert(value.message);
+      }
+    } else {
+      alert(res);
+    }
+  }
+
   function updateTags(e) {
     e.preventDefault();
     let value = tagInp.current.value;
@@ -341,6 +530,11 @@ const AddCourse = () => {
           id="CourseName"
           aria-describedby="nameHelp"
           required
+          onBlur={(e) => {
+            if (cname !== e.target.value) {
+              setcname(e.target.value);
+            }
+          }}
         />
         <small id="nameHelp" className="form-text text-muted">
           Enter the name of course
@@ -398,7 +592,15 @@ const AddCourse = () => {
           <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
         </svg>
       </button> */}
-      <button type="submit" disabled={!filled} className="btn btn-primary">
+      <button
+        type="submit"
+        onClick={(e) => {
+          e.preventDefault();
+          submitForm();
+        }}
+        className="btn"
+        style={{ backgroundColor: "rgb(127, 144, 251)", color: "white" }}
+      >
         Submit
       </button>
     </form>

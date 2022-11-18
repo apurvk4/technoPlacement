@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
-import Headers from "./Headers.js";
-import searchImg from "../images/search.png";
+import Footer from "./Footer";
+import Headers from "./Headers";
 import { useSearchParams } from "react-router-dom";
 import TagFilter from "./TagFilter.js";
-import Footer from "./Footer";
+import searchImg from "../images/search.png";
+import { useState, useEffect } from "react";
+import Modal from "./Modal";
 function intersection(array1, array2) {
   return array1.filter((value) => array2.includes(value));
 }
-const Article = () => {
+const Mcq = () => {
   const [questions, setQuestion] = useState([]);
   const [filtered, setFiltered] = useState(questions);
   const [search, setSearch] = useSearchParams();
   const [lastpage, setLastPage] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const [searchInp, setSearchInp] = useState(null);
-  // const [direction, setDirection] = useState("next");
+  const [showModal, setShowModal] = useState(false);
   async function getData() {
-    let url = process.env.REACT_APP_ALL_CTYPE + "article";
+    let url = process.env.REACT_APP_ALL_CTYPE + "mcq";
     let p = new URLSearchParams();
     if (search.get("skip") && search.get("skip") !== "null") {
       p.set("skip", search.get("skip"));
@@ -106,53 +107,29 @@ const Article = () => {
       }
     }
   }, [selectedTags]);
-  function displayArticles() {
+  function displayMcqs() {
     if ("items" in filtered) {
-      const items = filtered["items"];
-      return items.map((item, i) => {
-        // return (
-        //   <div key={i} className="about-content">
-        //     <div className="side-text">
-        //       <h2>{item.name}</h2>
-        //       <div className="t2">
-        //         {item["tags"].map((tag) => {
-        //           return <span>{tag}</span>;
-        //         })}
-        //       </div>
-        //       <p>{item.articleBody}</p>
-        //     </div>
-        //   </div>
-        // );
+      let items = filtered["items"];
+      return items.map((item) => {
         return (
-          <div className="accordion" id={"accordion" + i}>
-            <div className="card">
-              <div className="card-header" id={"heading" + i}>
-                <h2 className="mb-0 d-flex justify-content-between">
-                  <button
-                    className="btn text-left table-list"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target={"#collapse" + i}
-                    aria-expanded="true"
-                    aria-controls={"collapse" + i}
-                  >
-                    <div className="t1"> {item.name} </div>
-                    <div className="t2">
-                      {item["tags"].map((tag) => {
-                        return <span>{tag}</span>;
-                      })}
-                    </div>
-                  </button>
-                </h2>
+          <div className="table-list">
+            <div className="t1">
+              <div className="quesHeading">{item["name"]}</div>
+              <div className="quesLinks">
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setShowModal(!showModal);
+                  }}
+                >
+                  solve
+                </button>
               </div>
-              <div
-                id={"collapse" + i}
-                className="collapse"
-                aria-labelledby={"heading" + i}
-                data-parent={"#accordion" + i}
-              >
-                <div className="card-body">{item.articleBody}</div>
-              </div>
+            </div>
+            <div className="t2">
+              {item["tags"].map((tag) => (
+                <span>{tag}</span>
+              ))}
             </div>
           </div>
         );
@@ -162,30 +139,27 @@ const Article = () => {
   return (
     <>
       <Headers />
-      <div className="container-article">
+      <div className="container-inner">
         <div className="filters">
-          <div className="search-name">
-            <h2> Search Tags</h2>
-          </div>
           <div className="srch">
             <input
               type="text"
               className="search"
               placeholder="Search here..."
-              value={searchInp}
+              value={searchInp || ""}
               onInput={(e) => {
                 setSearchInp(e.target.value);
               }}
             />
             <img src={searchImg} alt="search" />
           </div>
-          <TagFilter
-            questions={filtered["items"]}
-            updateSelectedTags={setSelectedTags}
-            selectedTags={selectedTags}
-          />
         </div>
-        {displayArticles()}
+        <TagFilter
+          questions={filtered["items"]}
+          updateSelectedTags={setSelectedTags}
+          selectedTags={selectedTags}
+        />
+        {displayMcqs()}
         <button
           onClick={() => {
             getPrev();
@@ -202,8 +176,21 @@ const Article = () => {
         </button>
       </div>
       <Footer />
+      {showModal ? (
+        <Modal
+          darken="overlay"
+          outsideclick="notallow"
+          close={() => {
+            setShowModal(!showModal);
+          }}
+        >
+          <div>hii</div>
+        </Modal>
+      ) : (
+        ""
+      )}
     </>
   );
 };
 
-export default Article;
+export default Mcq;

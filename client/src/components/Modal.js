@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, cloneElement } from "react";
 import dom from "react-dom";
 const modalRoot = document.getElementById("modal-root");
 
@@ -59,7 +59,7 @@ export default class Modal extends Component {
             </button>
           </div>
           <div style={{ paddingLeft: "12px", paddingRight: "12px" }}>
-            {this.props.children}
+            {cloneElement(this.props.children, { ...this.props })}
           </div>
         </div>
       </div>,

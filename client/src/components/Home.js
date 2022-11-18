@@ -44,7 +44,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="home-page">
+      <div className="home-page" style={{ paddingTop: "57px" }}>
         <div className="home-div text-capitalize text-center">
           <p className="pt-5">WELCOME</p>
           <h1>{userName}</h1>

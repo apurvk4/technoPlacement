@@ -18,16 +18,6 @@ const courseSchema = new mongoose.Schema({
   details: {
     type: String,
   },
-  codingExamples: {
-    type: [
-      {
-        example: {
-          type: String,
-          required: [true, "Example is required !!"],
-        },
-      },
-    ],
-  },
   codingLinks: {
     type: [
       {
