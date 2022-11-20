@@ -44,14 +44,26 @@ const Home = () => {
 
   return (
     <>
-      <div className="home-page" style={{ paddingTop: "57px" }}>
-        <div className="home-div text-capitalize text-center">
-          <p className="pt-5">WELCOME</p>
-          <h1>{userName}</h1>
-          <h2>
-            {show ? "Happy To See You Back" : "WE ARE THE MERN DEVELOPERS"}
-          </h2>
-          <button
+      
+      <div className="head-container">
+        <div className="quote">
+          <p>
+            The beautiful thing about learning is that nobody can take it away
+            from you.
+          </p>
+          <h5>
+            Education is the process of facilitating learning, or the
+            acquisition of knowledge, skills, values, beliefs, and habits.
+            Educational methods include teaching, training, storytelling,
+            discussion and directed research!
+          </h5>
+          
+          <div className="home-page" style={{ paddingTop: "57px",backgroundColor:"" }}>
+          <div className="home-div  text-capitalize text-center">
+         
+          {/* <h1>{ `Hiii ${userName}`}</h1> */}
+          <button 
+          className="submit-btn"
             onClick={() => {
               setModal(!modal);
             }}
@@ -67,27 +79,17 @@ const Home = () => {
       ) : (
         " "
       )}
-      <div className="head-container">
-        <div className="quote">
-          <p>
-            The beautiful thing about learning is that nobody can take it away
-            from you
-          </p>
-          <h5>
-            Education is the process of facilitating learning, or the
-            acquisition of knowledge, skills, values, beliefs, and habits.
-            Educational methods include teaching, training, storytelling,
-            discussion and directed research!
-          </h5>
+      </div>
           {/* <div class="play">
 					<img src="images/icon/play.png" alt="play"><span><a href="https://www.youtube.com/watch?v=KFyrgDO1WXk" target="_blank">Watch Now</a></span>
 				</div> */}
-        </div>
+        
         <div className="svg-image">
           <img src={home1} alt="svg" />
         </div>
+        </div>
         <Categories />
-      </div>
+      
       <div className="title">
         <span>Popular subjects on TechnoPlacement</span>
       </div>

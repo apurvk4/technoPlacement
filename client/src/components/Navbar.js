@@ -21,8 +21,8 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" to="/contact">
-              Contact
+            <NavLink className="nav-link" to="/admin">
+              Admin
             </NavLink>
           </li>
           <li className="nav-item">
@@ -36,7 +36,7 @@ const Navbar = () => {
       return (
         <>
           <li className="nav-item active">
-            <NavLink className="nav-link" to="/">
+            <NavLink className="nav-link " to="/">
               Home{" "}
             </NavLink>
           </li>
@@ -46,8 +46,8 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" to="/contact">
-              Contact
+            <NavLink className="nav-link" to="/admin">
+              Admin
             </NavLink>
           </li>
           <li className="nav-item">
@@ -73,6 +73,7 @@ const Navbar = () => {
           position: "fixed",
           width: "100%",
           zIndex: "900",
+          backgroundColor:"grey"
         }}
       >
         <NavLink className="navbar-brand " to="/#">

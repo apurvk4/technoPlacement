@@ -3,7 +3,7 @@ import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import About from "./components/About";
-import Contact from "./components/Contact";
+import Admin from "./components/Admin";
 import "./App.css";
 import ErrorPage from "./components/ErrorPage";
 import Logout from "./components/Logout";
@@ -29,7 +29,7 @@ const App = () => {
 
           <Route path="/about" element={<About />} />
 
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/article" element={<Article />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
