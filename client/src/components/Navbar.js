@@ -21,11 +21,6 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" to="/admin">
-              Admin
-            </NavLink>
-          </li>
-          <li className="nav-item">
             <NavLink className="nav-link" to="/logout">
               Logout
             </NavLink>
@@ -36,18 +31,13 @@ const Navbar = () => {
       return (
         <>
           <li className="nav-item active">
-            <NavLink className="nav-link " to="/">
+            <NavLink className="nav-link" to="/">
               Home{" "}
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/about">
               About
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/admin">
-              Admin
             </NavLink>
           </li>
           <li className="nav-item">
