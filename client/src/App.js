@@ -15,6 +15,7 @@ import SignUp from "./components/SignUp";
 import Mcq from "./components/Mcq";
 import AdminLogin from "./components/AdminLogin";
 import AdminSignup from "./components/AdminSignup";
+import AdminHome from "./components/AdminHome";
 
 //context Api
 export const UserContext = createContext();
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/coding" element={<Coding />} />
           <Route path="/mcqs" element={<Mcq />} />
           <Route path="/adminSignup" element={<AdminSignup />} />
+          <Route path="/adminHome" element={<AdminHome />} />
           <Route path="/adminLogin" element={<AdminLogin />} />
           <Route path="/*" element={<ErrorPage />} />
         </Routes>
