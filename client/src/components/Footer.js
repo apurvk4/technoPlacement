@@ -10,21 +10,19 @@ const Footer=()=> {
     <div className='footer'>
        <div className="footer-container">
 			<div className="left-col">
-				<img src={logo}  style={{width:"200px"}}/>
+			<h1 >Our Newsletter</h1>
+				<img src={logo}  style={{width:"200px"}} />
+				<h3  className="  m-0" style={{fontFamily:"monospace"}}>Techno Placement</h3>
 				<div className="logo"></div>
-
-				<p className="rights-text">Copyright © 2021 Created By Roshan Kumar, Abhishek Dulat All Rights Reserved.</p>
-				<br/><p><img src={location}/> Lovely Professional University<br/>Phagwara, Punjab-144401</p><br/>
-				<p><img src={phone}/> +91-1234-567-890<br/><img src={location}/>&nbsp; learnedonline9419@gmail.com</p>
+				
 			</div>
-			<div className="right-col">
-				<h1 >Our Newsletter</h1>
+			<div className="right-col mb-0">
+				
+				<p className="rights-text">Copyright © 2022 Created By Apurv Kumar,Anjali Jain, Ankit Mathur,Bharat Kumar. All Rights Reserved.</p>
 				<div className="border"></div><br/>
-				<p>Enter Your Email to get our News and updates.</p>
-				{/* <form className="newsletter-form">
-					<input className="txtb" type="email" placeholder="Enter Your Email">
-					<input className="btn" type="submit" value="Submit">
-				</form> */}
+				<p><img src={phone}/> +91-1234-567-777<br/></p>
+				<br/><p><img src={location}/>SKIT, Jaipur<br/>Jaipur, Rajasthan</p><br/>
+				
 			</div>
 		</div>
         </div>
