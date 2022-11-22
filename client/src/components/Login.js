@@ -12,6 +12,7 @@ const Login = () => {
     e.preventDefault();
     const res = await fetch(process.env.REACT_APP_USER_SIGNIN, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

@@ -1,5 +1,6 @@
 import Footer from "./Footer";
 import Headers from "./Headers";
+import McqModal from "./McqModal";
 import { useSearchParams } from "react-router-dom";
 import TagFilter from "./TagFilter.js";
 import searchImg from "../images/search.png";
@@ -184,7 +185,7 @@ const Mcq = () => {
             setShowModal(!showModal);
           }}
         >
-          <div>hii</div>
+          <McqModal />
         </Modal>
       ) : (
         ""
