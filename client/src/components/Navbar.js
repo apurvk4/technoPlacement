@@ -66,8 +66,9 @@ const Navbar = () => {
           backgroundColor:"grey"
         }}
       >
-        <NavLink className="navbar-brand " to="/#">
+        <NavLink className="navbar-brand " style={{display:"flex"}} to="/#">
           <img src={logo} style={{ width: "49px" }} />
+          <h3  className="  m-0" style={{fontFamily:"monospace"}}>Techno Placement</h3>
         </NavLink>
         <button
           className="navbar-toggler"
