@@ -3,6 +3,7 @@ const handleError = require("../handleError");
 const AuthenticateAdmin = require("../middleware/authenticateAdmin");
 const bcrypt = require("bcryptjs");
 const Admin = require("../model/adminSchema");
+const Course = require("../model/courseSchema");
 const cookieParser = require("cookie-parser");
 const router = express.Router();
 const mongoose = require("mongoose");
@@ -98,12 +99,41 @@ router.patch("/update", AuthenticateAdmin, async (req, res) => {
     res.status(400).send(handleError(err));
   }
 });
+router.get("/all", AuthenticateAdmin, async (req, res) => {
+  try {
+    let type = req.params.type;
+    const filterQuery = { author: req.adminID };
+    let limit = 5;
+    let skip = 0;
+    if (req.query.limit) {
+      let l = Number.parseInt(req.query.limit);
+      if (Number.isInteger(l)) {
+        limit = l;
+      }
+    }
+    if (req.query.skip) {
+      let s = Number.parseInt(req.query.skip);
+      if (Number.isInteger(s)) {
+        skip = s;
+      }
+    }
+    let items = await Course.aggregate([
+      { $sort: { date: -1 } },
+      { $match: filterQuery },
+      { $skip: skip },
+      { $limit: limit },
+    ]);
+    res.status(200).send({ items });
+  } catch (err) {
+    res.status(400).send(handleError(err));
+  }
+});
 router.get("/signout", AuthenticateAdmin, async (req, res) => {
   try {
     console.log("hello my logout page");
-    await req.rootadmin.tokens.pull(ObjectId(req.token));
+    await req.rootadmin.tokens.pull({ token: req.token });
     await req.rootadmin.save();
-    res.clearCookie("jwtoken", { path: "./" });
+    res.clearCookie("jwtoken");
     res.status(200).send("user Logout");
   } catch (err) {
     res.status(400).send(handleError(err));

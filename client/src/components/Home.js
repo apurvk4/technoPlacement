@@ -44,7 +44,6 @@ const Home = () => {
 
   return (
     <>
-      
       <div className="head-container">
         <div className="quote">
           <p>
@@ -58,46 +57,68 @@ const Home = () => {
             discussion and directed research!
           </h5>
           <div className="btn-group">
-           <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Admin</button>
-           <ul className="dropdown-menu">
-            <li><a className="dropdown-item" href="#">Action</a></li>
-            <li><a className="dropdown-item" href="#">Another action</a></li>
-            <li><a className="dropdown-item" href="#">Something else here</a></li>
-           </ul>
+            <button
+              type="button"
+              class="btn btn-danger dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Admin
+            </button>
+            <ul className="dropdown-menu">
+              <li>
+                <a className="dropdown-item" href="#">
+                  Action
+                </a>
+              </li>
+              <li>
+                <a className="dropdown-item" href="#">
+                  Another action
+                </a>
+              </li>
+              <li>
+                <a className="dropdown-item" href="#">
+                  Something else here
+                </a>
+              </li>
+            </ul>
           </div>
-          
-          <div className="home-page" style={{ paddingTop: "57px",backgroundColor:"" }}>
-          <div className="home-div  text-capitalize text-center">
-         
-          {/* <h1>{ `Hiii ${userName}`}</h1> */}
-          <button 
-          className="submit-btn"
-            onClick={() => {
-              setModal(!modal);
-            }}
+
+          <div
+            className="home-page"
+            style={{ paddingTop: "57px", backgroundColor: "" }}
           >
-            Toggle Modal
-          </button>
+            <div className="home-div  text-capitalize text-center">
+              {/* <h1>{ `Hiii ${userName}`}</h1> */}
+              <button
+                className="submit-btn"
+                onClick={() => {
+                  setModal(!modal);
+                }}
+              >
+                Toggle Modal
+              </button>
+            </div>
+            x
+          </div>
+          {modal ? (
+            <Modal outsideclick="notallow" darken={true} close={close}>
+              <AddCourse />
+            </Modal>
+          ) : (
+            " "
+          )}
         </div>
-      </div>
-      {modal ? (
-        <Modal outsideclick="notallow" darken={true} close={close}>
-          <AddCourse />
-        </Modal>
-      ) : (
-        " "
-      )}
-      </div>
-          {/* <div class="play">
+        {/* <div class="play">
 					<img src="images/icon/play.png" alt="play"><span><a href="https://www.youtube.com/watch?v=KFyrgDO1WXk" target="_blank">Watch Now</a></span>
 				</div> */}
-        
+
         <div className="svg-image">
           <img src={home1} alt="svg" />
         </div>
-        </div>
-        <Categories />
-      
+      </div>
+      <Categories />
+
       <div className="title">
         <span>Popular subjects on TechnoPlacement</span>
       </div>

@@ -25,6 +25,7 @@ const SignUp = () => {
     const { name, email, phone, work, password, cpassword } = user;
     const res = await fetch(process.env.REACT_APP_USER_REGISTER, {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, phone, work, password, cpassword }),
     });
