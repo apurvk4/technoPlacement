@@ -1,5 +1,5 @@
 const express = require("express");
-const handleError = require("../handleError");
+const handleError = require("../../handleError");
 const AuthenticateAdmin = require("../middleware/authenticateAdmin");
 const bcrypt = require("bcryptjs");
 const Admin = require("../model/adminSchema");

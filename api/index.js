@@ -2,14 +2,14 @@ require("dotenv").config(); //To secure the code we install dotenv
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
-const userRoutes = require("../router/user");
-const adminRouter = require("../router/admin");
-const courseRouter = require("../router/course");
+const userRoutes = require("./router/user");
+const adminRouter = require("./router/admin");
+const courseRouter = require("./router/course");
 const handleError = require("../handleError");
-const Feedback = require("../model/feedbackSchema");
+const Feedback = require("./model/feedbackSchema");
 const jwt = require("jsonwebtoken");
-const User = require("../model/userSchema");
-const Admin = require("../model/adminSchema");
+const User = require("./model/userSchema");
+const Admin = require("./model/adminSchema");
 function corsMiddleWare(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.removeHeader("X-powered-by");
@@ -25,7 +25,7 @@ function corsMiddleWare(req, res, next) {
 }
 app.use(cookieParser());
 app.use(corsMiddleWare);
-require("../db/conn");
+require("./db/conn");
 app.use(express.json()); //middleware to understand json format for our application
 app.get("/api/verifytoken", async (req, res) => {
   try {

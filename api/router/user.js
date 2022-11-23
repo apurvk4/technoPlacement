@@ -8,7 +8,7 @@ require("../db/conn");
 const User = require("../model/userSchema");
 const authenticateUser = require("../middleware/authenticateUser");
 const cookieParser = require("cookie-parser");
-const handleError = require("../handleError");
+const handleError = require("../../handleError");
 router.use(cookieParser());
 router.get("/", (req, res) => {
   res.send(`Hello from the server router js`);
