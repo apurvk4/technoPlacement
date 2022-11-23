@@ -66,6 +66,7 @@ router.post("/signin", async (req, res) => {
           //  name-value
           expires: new Date(Date.now() + 25892000000),
           httpOnly: true, //after 30 days
+          sameSite: "none",
         });
         res.status(200).send({ message: "Signin successfully" });
       }
