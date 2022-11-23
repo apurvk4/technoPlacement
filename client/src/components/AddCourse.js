@@ -1,4 +1,3 @@
-import { PromiseProvider } from "mongoose";
 import { useState, useRef } from "react";
 function codingCourse(details, links, setDetails, setLinks) {
   return (
