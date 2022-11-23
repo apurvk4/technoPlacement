@@ -187,6 +187,7 @@ const Article = () => {
         </div>
         {displayArticles()}
         <button
+           className="submit-btn" style={{marginLeft:0}}
           onClick={() => {
             getPrev();
           }}
@@ -194,6 +195,7 @@ const Article = () => {
           prev
         </button>
         <button
+        className="submit-btn" 
           onClick={() => {
             getNext();
           }}

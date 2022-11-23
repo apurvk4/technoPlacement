@@ -7,7 +7,6 @@ import location from "../images/location.png";
 const Footer=()=> {
   return (
     <>
-<<<<<<< HEAD
     <div className='footer'>
        <div className="footer-container">
 			<div className="left-col">
@@ -26,30 +25,8 @@ const Footer=()=> {
 				
 			</div>
 		</div>
-=======
-      <div className="footer">
-        <div className="footer-container" style={{ marginLeft: "51px" }}>
-          <div className="left-col">
-            <img src={logo} style={{ width: "200px" }} />
-            <div className="logo"></div>
-
-            <p className="rights-text">
-              Copyright © 2022 Created By Anjali Jain, Ankit Mathur , Apurv
-              kumar and Bharat Kumar All Rights Reserved.
-            </p>
-
-            <p>
-              <img src={location} /> SKIT Jaipur,Rajasthan-302017
-            </p>
-
-            <p>
-              <img src={location} />
-              &nbsp; technoplacement@gmail.com
-            </p>
-          </div>
->>>>>>> c892a99d548a7baee4786c950f0ac35ccd4392a2
         </div>
-      </div>
+      
     </>
   );
 };

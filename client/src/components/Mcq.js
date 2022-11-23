@@ -162,6 +162,7 @@ const Mcq = () => {
         />
         {displayMcqs()}
         <button
+        className="submit-btn" style={{marginLeft:0}}
           onClick={() => {
             getPrev();
           }}
@@ -169,6 +170,7 @@ const Mcq = () => {
           prev
         </button>
         <button
+        className="submit-btn" 
           onClick={() => {
             getNext();
           }}

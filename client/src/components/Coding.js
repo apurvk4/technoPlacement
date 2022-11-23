@@ -161,18 +161,10 @@ const Coding = () => {
           selectedTags={selectedTags}
         />
         {displayQuestions()}
-        <button
-          onClick={() => {
-            getPrev();
-          }}
-        >
+        <button className="submit-btn" style={{marginLeft:0}} onClick={() => {  getPrev();}}>
           Prev
         </button>
-        <button
-          onClick={() => {
-            getNext();
-          }}
-        >
+        <button className="submit-btn" onClick={() => {getNext();}}>
           next
         </button>
       </div>
