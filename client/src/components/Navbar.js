@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from "react";
-import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap/dist/css/bootstrap.css";
 import { NavLink } from "react-router-dom";
 import UserContext from "../contexts/userContext";
 import logo from "../images/logo.png";
