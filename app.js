@@ -7,7 +7,9 @@ const adminRouter = require("./router/admin");
 const courseRouter = require("./router/course");
 const handleError = require("./handleError");
 const Feedback = require("./model/feedbackSchema");
-
+const jwt = require("jsonwebtoken");
+const User = require("./model/userSchema");
+const Admin = require("./model/adminSchema");
 function corsMiddleWare(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.removeHeader("X-powered-by");
@@ -25,6 +27,45 @@ app.use(cookieParser());
 app.use(corsMiddleWare);
 require("./db/conn");
 app.use(express.json()); //middleware to understand json format for our application
+app.get("/api/verifytoken", async (req, res) => {
+  try {
+    const token = req.cookies.jwtoken; //getting the token
+    const verifyToken = jwt.verify(token, process.env.SECRET_KEY); //Verifying token
+    //vertifyToken have all the info(collection)
+    const rootUser = await User.findOne({
+      _id: verifyToken._id,
+      "tokens.token": token,
+    }); //checking if token exist
+
+    if (rootUser) {
+      req.token = token;
+      req.rootUser = rootUser; //rootuser have the document
+      req.userID = rootUser._id; //fetching id of that particular document from rootUser
+      console.log(rootUser);
+      res.status(200).send({
+        level: "user",
+        value: rootUser.toObject(),
+      });
+      return;
+    }
+    const rootAdmin = await Admin.findOne({
+      _id: verifyToken._id,
+      "tokens.token": token,
+    });
+    if (rootAdmin) {
+      res.status(200).send({
+        level: "admin",
+        value: rootAdmin.toObject(),
+      });
+      return;
+    }
+    res.clearCookie("jwtoken");
+    res.status(400).send({ message: "invalid token" });
+  } catch (err) {
+    res.status(400).send(handleError(err));
+    console.log(err);
+  }
+});
 app.post("/api/feedback", async (req, res) => {
   try {
     let { name, email, phone, message } = req.body;

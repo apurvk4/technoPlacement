@@ -285,10 +285,9 @@ const AddCourse = (props) => {
         let l = McqCourse(mcq.length, removeMcq, mcq);
         let btn = (
           <button
-            id="tag-add-btn"
+            id="tag-add-btn btn-success"
             className="btn"
             style={{
-              backgroundColor: "#7f90fb",
               marginLeft: "10px",
               width: "149px",
               height: "50px",
@@ -569,8 +568,8 @@ const AddCourse = (props) => {
         />
         <button
           id="tag-add-btn"
-          className="btn"
-          style={{ backgroundColor: "#7f90fb", marginLeft: "10px" }}
+          className="btn btn-success"
+          style={{ marginLeft: "10px" }}
           onClick={(e) => updateTags(e)}
         >
           Add
@@ -598,8 +597,8 @@ const AddCourse = (props) => {
           e.preventDefault();
           submitForm();
         }}
-        className="btn"
-        style={{ backgroundColor: "rgb(127, 144, 251)", color: "white" }}
+        className="btn btn-success"
+        style={{ color: "white" }}
       >
         Submit
       </button>

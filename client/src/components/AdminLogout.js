@@ -2,19 +2,19 @@ import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../contexts/userContext";
 
-const Logout = () => {
+const AdminLogout = () => {
   const { setLevel, setLogin, setData } = useContext(UserContext);
   const navigate = useNavigate();
-  async function logoutUser() {
+  async function logoutAdmin() {
     try {
-      const res = await fetch(process.env.REACT_APP_USER_SIGNOUT, {
+      const res = await fetch(process.env.REACT_APP_ADMIN_SIGNOUT, {
         method: "GET",
         credentials: "include",
         headers: {
           Accept: "application/json",
         },
       });
-      if (res.status === 201) {
+      if (res.status === 200) {
         setLevel("none");
         setLogin(false);
         setData({});
@@ -28,7 +28,7 @@ const Logout = () => {
     }
   }
   useEffect(() => {
-    logoutUser();
+    logoutAdmin();
   }, []);
 
   return (
@@ -37,4 +37,4 @@ const Logout = () => {
     </>
   );
 };
-export default Logout;
+export default AdminLogout;

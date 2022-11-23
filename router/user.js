@@ -118,7 +118,7 @@ router.get("/signout", authenticateUser, async (req, res) => {
     await req.rootUser.tokens.pull({ token: req.token });
     await req.rootUser.save();
     res.clearCookie("jwtoken");
-    res.status(201).send("user Logout");
+    res.status(201).send({ message: "user Logout" });
   } catch (err) {
     res.status(400).send(handleError(err));
   }

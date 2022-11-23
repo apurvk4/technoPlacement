@@ -14,7 +14,7 @@ const AuthenticateUser = async (req, res, next) => {
     }); //checking if token exist
 
     if (!rootUser) {
-      throw new Error("user not found");
+      throw { message: "user not found" };
     }
     req.token = token;
     req.rootUser = rootUser; //rootuser have the document
@@ -25,7 +25,7 @@ const AuthenticateUser = async (req, res, next) => {
 
     console.log("me andar aagya");
   } catch (err) {
-    res.status(401).send("unauthorised:no Token provided");
+    res.status(401).send({ message: "unauthorised:no Token provided" });
     console.log(err);
   }
 };

@@ -17,6 +17,7 @@ const Mcq = () => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [searchInp, setSearchInp] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [quesIndex, setQuesIndex] = useState(0);
   async function getData() {
     let url = process.env.REACT_APP_ALL_CTYPE + "mcq";
     let p = new URLSearchParams();
@@ -111,7 +112,7 @@ const Mcq = () => {
   function displayMcqs() {
     if ("items" in filtered) {
       let items = filtered["items"];
-      return items.map((item) => {
+      return items.map((item, i) => {
         return (
           <div className="table-list">
             <div className="t1">
@@ -119,8 +120,10 @@ const Mcq = () => {
               <div className="quesLinks">
                 <button
                   className="btn"
-                  onClick={() => {
+                  data-id={i}
+                  onClick={(e) => {
                     setShowModal(!showModal);
+                    setQuesIndex(parseInt(e.target.dataset.id));
                   }}
                 >
                   solve
@@ -136,6 +139,18 @@ const Mcq = () => {
         );
       });
     }
+  }
+  function passQuestions() {
+    if ("items" in filtered) {
+      return filtered["items"][quesIndex]["mcqs"];
+    }
+    return [];
+  }
+  function passHeader() {
+    if ("items" in filtered) {
+      return filtered["items"][quesIndex]["name"];
+    }
+    return "";
   }
   return (
     <>
@@ -183,11 +198,12 @@ const Mcq = () => {
         <Modal
           darken="overlay"
           outsideclick="notallow"
+          header={passHeader()}
           close={() => {
             setShowModal(!showModal);
           }}
         >
-          <McqModal />
+          <McqModal questions={passQuestions()} />
         </Modal>
       ) : (
         ""

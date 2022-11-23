@@ -1,58 +1,144 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { NavLink } from "react-router-dom";
-import { UserContext } from "../App";
+import UserContext from "../contexts/userContext";
 import logo from "../images/logo.png";
 const Navbar = () => {
-  const { state, dispatch } = useContext(UserContext);
-
+  const { level, login } = useContext(UserContext);
+  const adminLinks = useRef(null);
+  const userLinks = useRef(null);
   const RenderMenu = () => {
-    if (state) {
-      return (
-        <>
-          <li className="nav-item active">
-            <NavLink className="nav-link" to="/">
-              Home{" "}
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/about">
-              About
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/logout">
-              Logout
-            </NavLink>
-          </li>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <li className="nav-item active">
-            <NavLink className="nav-link" to="/">
-              Home{" "}
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/about">
-              About
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/login">
-              Login
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/signup">
-              Registration
-            </NavLink>
-          </li>
-        </>
-      );
-    }
+    return (
+      <>
+        <li className="nav-item active">
+          <NavLink className="nav-link" style={{ borderRadius: 0 }} to="/">
+            Home
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <div className="btn-group">
+            <button
+              type="button"
+              class={
+                level === "user" && login
+                  ? "btn dropdown-toggle nav-btn-active"
+                  : "btn dropdown-toggle"
+              }
+              style={{ fontSize: "20px", fontWeight: "500" }}
+              aria-expanded="false"
+              onClick={() => {
+                adminLinks.current.classList.toggle("admin-link-active");
+              }}
+            >
+              User
+            </button>
+            <ul className="dropdown-menu" ref={adminLinks}>
+              <li>
+                <NavLink
+                  className="dropdown-item"
+                  style={{ borderRadius: 0 }}
+                  to="/login"
+                >
+                  User Login
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="dropdown-item"
+                  style={{ borderRadius: 0 }}
+                  to="/signup"
+                >
+                  User SignUp
+                </NavLink>
+              </li>
+              {level === "user" && login ? (
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    style={{ borderRadius: 0 }}
+                    to="/logout"
+                  >
+                    User Logout
+                  </NavLink>
+                </li>
+              ) : (
+                ""
+              )}
+            </ul>
+          </div>
+        </li>
+        <li className="nav-item">
+          <div className="btn-group">
+            <button
+              type="button"
+              class={
+                level === "admin" && login
+                  ? "btn dropdown-toggle nav-btn-active"
+                  : "btn dropdown-toggle"
+              }
+              aria-expanded="false"
+              style={{ fontSize: "20px", fontWeight: "500" }}
+              onClick={() => {
+                userLinks.current.classList.toggle("admin-link-active");
+              }}
+            >
+              Admin
+            </button>
+            <ul className="dropdown-menu" ref={userLinks}>
+              {login && level === "admin" ? (
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    style={{ borderRadius: 0 }}
+                    to="/adminHome"
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+              ) : (
+                ""
+              )}
+              <li>
+                <NavLink
+                  className="dropdown-item"
+                  style={{ borderRadius: 0 }}
+                  to="/adminLogin"
+                >
+                  Admin Login
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="dropdown-item"
+                  style={{ borderRadius: 0 }}
+                  to="/adminSignup"
+                >
+                  Admin SignUp
+                </NavLink>
+              </li>
+              {level === "admin" && login ? (
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    style={{ borderRadius: 0 }}
+                    to="/adminSignout"
+                  >
+                    Admin Logout
+                  </NavLink>
+                </li>
+              ) : (
+                ""
+              )}
+            </ul>
+          </div>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/about">
+            About
+          </NavLink>
+        </li>
+      </>
+    );
   };
   return (
     <>
@@ -63,12 +149,15 @@ const Navbar = () => {
           position: "fixed",
           width: "100%",
           zIndex: "900",
-          backgroundColor:"grey"
+          backgroundColor: "grey",
         }}
       >
-        <NavLink className="navbar-brand " style={{display:"flex"}} to="/#">
-          <img src={logo} style={{ width: "49px" }} />
-          <h3  className="  m-0" style={{fontFamily:"monospace"}}>Techno Placement</h3>
+        <NavLink className="navbar-brand " to="/#">
+          <img
+            src={logo}
+            alt="technoplacement logo"
+            style={{ width: "49px" }}
+          />
         </NavLink>
         <button
           className="navbar-toggler"

@@ -156,8 +156,8 @@ router.get("/join/:cid", authenticateUser, async (req, res) => {
   }
 });
 
-router.post("/add", async (req, res) => {
-  req.adminID = ObjectId("6353dd7f92ed75bc0e6f5a22");
+router.post("/add", authenticateAdmin, async (req, res) => {
+  // req.adminID = ObjectId("6353dd7f92ed75bc0e6f5a22");
   try {
     let ans = verifyArticleCourse(req);
     if (!ans.status) {

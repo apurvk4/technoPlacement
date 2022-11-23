@@ -12,7 +12,7 @@ const AuthenticateAdmin = async (req, res, next) => {
     }); //checking if token exist
 
     if (!rootadmin) {
-      res.status(401).send("admin not found!!");
+      res.status(401).send({ message: "admin not found!!" });
       return;
     }
     req.token = token;
@@ -22,7 +22,7 @@ const AuthenticateAdmin = async (req, res, next) => {
 
     next();
   } catch (err) {
-    res.status(401).send("unauthorised:no Token provided");
+    res.status(401).send({ message: "unauthorised:no Token provided" });
   }
 };
 module.exports = AuthenticateAdmin;

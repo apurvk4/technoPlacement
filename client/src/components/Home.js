@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import AddCourse from "./AddCourse";
-import Coding from "./Coding";
-import Modal from "./Modal";
+import React, { useState, useEffect, useRef } from "react";
+// import AddCourse from "./AddCourse";
+// import Coding from "./Coding";
+// import Modal from "./Modal";
 import Footer from "./Footer";
 import Contact from "./Contact";
 import algo from "../images/algo.png";
@@ -17,8 +17,7 @@ import Categories from "./Categories";
 const Home = () => {
   const [show, setShow] = useState(false);
   const [userName, setUserName] = useState("");
-  const [modal, setModal] = useState(false);
-
+  const adminLinks = useRef(null);
   const userHomePage = async () => {
     try {
       const res = await fetch("/getdata", {
@@ -35,9 +34,6 @@ const Home = () => {
       console.log(e);
     }
   };
-  function close() {
-    setModal(false);
-  }
   useEffect(() => {
     userHomePage();
   }, []);
@@ -56,58 +52,6 @@ const Home = () => {
             Educational methods include teaching, training, storytelling,
             discussion and directed research!
           </h5>
-          <div className="btn-group">
-            <button
-              type="button"
-              class="btn btn-danger dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Admin
-            </button>
-            <ul className="dropdown-menu">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div
-            className="home-page"
-            style={{ paddingTop: "57px", backgroundColor: "" }}
-          >
-            <div className="home-div  text-capitalize text-center">
-              {/* <h1>{ `Hiii ${userName}`}</h1> */}
-              <button
-                className="submit-btn"
-                onClick={() => {
-                  setModal(!modal);
-                }}
-              >
-                Toggle Modal
-              </button>
-            </div>
-            x
-          </div>
-          {modal ? (
-            <Modal outsideclick="notallow" darken={true} close={close}>
-              <AddCourse />
-            </Modal>
-          ) : (
-            " "
-          )}
         </div>
         {/* <div class="play">
 					<img src="images/icon/play.png" alt="play"><span><a href="https://www.youtube.com/watch?v=KFyrgDO1WXk" target="_blank">Watch Now</a></span>

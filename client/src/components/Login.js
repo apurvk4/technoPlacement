@@ -1,13 +1,14 @@
-import React, { useState, useContext } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import UserContext from "../contexts/userContext";
 import google from "../images/google.png";
-import { UserContext } from "../App";
+// import { UserContext } from "../App";
 
 const Login = () => {
-  const { state, dispatch } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const { login, level, setLevel, setLogin, setData } = useContext(UserContext);
+  const navigate = useNavigate();
   const loginUser = async (e) => {
     e.preventDefault();
     const res = await fetch(process.env.REACT_APP_USER_SIGNIN, {
@@ -25,11 +26,24 @@ const Login = () => {
     if (!data || res.status === 400) {
       window.alert("Invalid Credentials");
     } else {
-      dispatch({ type: "USER", payload: true });
-      window.alert("Login successful");
+      setLevel("user");
+      setLogin(true);
+      setData(data);
+      navigate("/");
     }
   };
-
+  useEffect(() => {
+    if (login) {
+      let u = "someone";
+      if (level === "admin") {
+        u = "An Admin";
+      } else if (level === "user") {
+        u = "An User";
+      }
+      alert(u + " is already logged in . please logout to continue");
+      navigate("/");
+    }
+  }, []);
   return (
     <>
       <div className="bodyPage">

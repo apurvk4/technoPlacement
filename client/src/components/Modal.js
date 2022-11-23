@@ -45,6 +45,7 @@ export default class Modal extends Component {
       <div className="container0">
         <div className="container" style={{ padding: "0px" }}>
           <div className="modal-top">
+            <b>{this.props.header}</b>
             <button className="modal-close" onClick={this.props.close}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
