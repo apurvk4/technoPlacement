@@ -170,13 +170,12 @@ const SignUp = () => {
                   placeholder="confirm your password"
                 ></input>
               </div>
-
               <div className="inp  submit-btn">
                 <input
                   type="submit"
                   name="signup"
                   id="signup"
-                  className=" btn text-center"
+                  className=" btn text-center bg-inherit"
                   onClick={PostData}
                   value="Register"
                 />

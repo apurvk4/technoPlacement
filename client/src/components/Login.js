@@ -127,7 +127,7 @@ const Login = () => {
                   type="submit"
                   name="signin"
                   onClick={loginUser}
-                  className="btn"
+                  className="btn bg-inherit"
                   value="Log in"
                 />
               </div>
