@@ -41,7 +41,7 @@ const AdminHome = () => {
   }
   async function getCourses() {
     try {
-      const res = await fetch(process.env.REACT_APP_ADMIN_ALL, {
+      const res = await fetch(process.env.REACT_APP_ADMIN_ALL+"?limit=100", {
         credentials: "include",
         method: "GET",
         headers: {
