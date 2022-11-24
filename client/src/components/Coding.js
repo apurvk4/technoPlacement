@@ -6,7 +6,9 @@ import TagFilter from "./TagFilter.js";
 // import { Button } from "bootstrap";
 import Footer from "./Footer";
 function intersection(array1, array2) {
-  return array1.filter((value) => array2.includes(value));
+  let a = array1.filter((value) => array2.includes(value));
+  a = new Set(a);
+  return Array.from(a);
 }
 const Coding = () => {
   const [questions, setQuestion] = useState([]);

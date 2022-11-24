@@ -7,7 +7,9 @@ import searchImg from "../images/search.png";
 import { useState, useEffect } from "react";
 import Modal from "./Modal";
 function intersection(array1, array2) {
-  return array1.filter((value) => array2.includes(value));
+  let a = array1.filter((value) => array2.includes(value));
+  a = new Set(a);
+  return Array.from(a);
 }
 const Mcq = () => {
   const [questions, setQuestion] = useState([]);
