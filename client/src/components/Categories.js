@@ -1,7 +1,26 @@
 import React from 'react'
-import { categories } from '../data.js';
 import Category from './Category.js';
-
+categories = [
+	{
+	  id: 1,
+	  img: coding,
+	  title: "Coding Questions",
+	  route: "coding",
+	},
+	{
+	  id: 2,
+	  img: brainbooster,
+	  title: "MCQ's for OA",
+	  route: "mcqs",
+	},
+	{
+	  id: 3,
+	  img: papers,
+	  title: " Top Articles",
+	  route: "article",
+	},
+  ];
+  
 
 
 
