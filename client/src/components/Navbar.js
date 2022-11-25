@@ -1,8 +1,8 @@
 import React, { useContext, useRef } from "react";
-// import "bootstrap/dist/css/bootstrap.css";
 import { NavLink } from "react-router-dom";
 import UserContext from "../contexts/userContext";
 import logo from "../images/logo.png";
+import Dropdown from "./Dropdown";
 const Navbar = () => {
   const { level, login } = useContext(UserContext);
   const adminLinks = useRef(null);
@@ -26,45 +26,46 @@ const Navbar = () => {
               }
               style={{ fontSize: "20px", fontWeight: "500" }}
               aria-expanded="false"
-              onClick={() => {
+              onClick={(e) => {
                 adminLinks.current.classList.toggle("admin-link-active");
+                e.stopPropagation();
               }}
             >
               User
             </button>
-            <ul className="dropdown-menu" ref={adminLinks}>
-              <li>
+              <Dropdown r={adminLinks}>
+               <li>
                 <NavLink
-                  className="dropdown-item"
+                   className="dropdown-item"
                   style={{ borderRadius: 0 }}
                   to="/login"
                 >
-                  User Login
+                User Login
                 </NavLink>
               </li>
-              <li>
+            <li>
+              <NavLink
+               className="dropdown-item"
+               style={{ borderRadius: 0 }}
+               to="/signup"
+              >
+              User SignUp
+             </NavLink>
+            </li>
+           {level === "user" && login ? (
+             <li>
                 <NavLink
-                  className="dropdown-item"
-                  style={{ borderRadius: 0 }}
-                  to="/signup"
+                 className="dropdown-item"
+                 style={{ borderRadius: 0 }}
+                 to="/logout"
                 >
-                  User SignUp
-                </NavLink>
-              </li>
-              {level === "user" && login ? (
-                <li>
-                  <NavLink
-                    className="dropdown-item"
-                    style={{ borderRadius: 0 }}
-                    to="/logout"
-                  >
-                    User Logout
-                  </NavLink>
-                </li>
-              ) : (
-                ""
-              )}
-            </ul>
+                User Logout
+               </NavLink>
+            </li>
+          ) : (
+            ""
+          )}
+              </Dropdown>
           </div>
         </li>
         <li className="nav-item">
@@ -78,14 +79,15 @@ const Navbar = () => {
               }
               aria-expanded="false"
               style={{ fontSize: "20px", fontWeight: "500" }}
-              onClick={() => {
+              onClick={(e) => {
                 userLinks.current.classList.toggle("admin-link-active");
+                e.stopPropagation();
               }}
             >
               Admin
             </button>
-            <ul className="dropdown-menu" ref={userLinks}>
-              {login && level === "admin" ? (
+            <Dropdown  r={userLinks}>
+            {login && level === "admin" ? (
                 <li>
                   <NavLink
                     className="dropdown-item"
@@ -129,7 +131,7 @@ const Navbar = () => {
               ) : (
                 ""
               )}
-            </ul>
+            </Dropdown>
           </div>
         </li>
         <li className="nav-item">
