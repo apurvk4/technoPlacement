@@ -1,6 +1,9 @@
 import React from 'react'
 import Category from './Category.js';
-categories = [
+import coding from "../images/coding.png"
+import brainbooster from "../images/brainbooster.png";
+import papers from "../images/papers.jpg";
+const categories = [
 	{
 	  id: 1,
 	  img: coding,
@@ -27,7 +30,6 @@ categories = [
 const Categories=()=> {
   return (
     <>
-    
     <div className="service-swipe">
 		<div className="diffSection" id="services_section">
 		<center><p style={{fontSize: "50px", padding: "100px", paddingBottom: "40px", color: "#fff"}}>Services</p></center>
