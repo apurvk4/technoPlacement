@@ -4,6 +4,7 @@ import searchImg from "../images/search.png";
 import { useSearchParams } from "react-router-dom";
 import TagFilter from "./TagFilter.js";
 import Footer from "./Footer";
+import Loading from "./Loading.js";
 function intersection(array1, array2) {
   let a = array1.filter((value) => array2.includes(value));
   a = new Set(a);
@@ -16,6 +17,7 @@ const Article = () => {
   const [lastpage, setLastPage] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const [searchInp, setSearchInp] = useState(null);
+  const [loading,setLoading]= useState(false);
   // const [direction, setDirection] = useState("next");
   async function getData() {
     let url = process.env.REACT_APP_ALL_CTYPE + "article";
@@ -64,6 +66,7 @@ const Article = () => {
     if (!search.has("skip") && !search.has("limit")) {
       setSearch({ skip: 0, limit: 5 });
     } else if (!lastpage) {
+      setLoading(true);
       getData().then((val) => {
         if (!val.status) {
           alert(val.result);
@@ -77,7 +80,11 @@ const Article = () => {
             setSearch({ ...search, skip: s - l, limit: l });
             alert("this is the last page");
           }
+          setLoading(false);
         }
+      }).catch((err)=>{
+        setLoading(false);
+        alert(err.message);
       });
     }
   }, [search]);
@@ -187,7 +194,7 @@ const Article = () => {
             selectedTags={selectedTags}
           />
         </div>
-        {displayArticles()}
+        {loading ? <Loading/> :displayArticles()}
         <button
            className="submit-btn" style={{marginLeft:0}}
           onClick={() => {

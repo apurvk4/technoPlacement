@@ -3,6 +3,7 @@ import Headers from "./Headers.js";
 import searchImg from "../images/search.png";
 import { useSearchParams } from "react-router-dom";
 import TagFilter from "./TagFilter.js";
+import Loading from "./Loading";
 // import { Button } from "bootstrap";
 import Footer from "./Footer";
 function intersection(array1, array2) {
@@ -17,6 +18,7 @@ const Coding = () => {
   const [lastpage, setLastPage] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const [searchInp, setSearchInp] = useState(null);
+  const [loading,setLoading] = useState(false);
   // const [direction, setDirection] = useState("next");
   async function getData() {
     let url = process.env.REACT_APP_ALL_CTYPE + "coding";
@@ -65,6 +67,7 @@ const Coding = () => {
     if (!search.has("skip") && !search.has("limit")) {
       setSearch({ skip: 0, limit: 5 });
     } else if (!lastpage) {
+      setLoading(true);
       getData().then((val) => {
         if (!val.status) {
           alert(val.result);
@@ -79,6 +82,10 @@ const Coding = () => {
             alert("this is the last page");
           }
         }
+        setLoading(false);
+      }).catch((err)=>{
+        setLoading(false);
+        alert(err.message);
       });
     }
   }, [search]);
@@ -162,7 +169,7 @@ const Coding = () => {
           updateSelectedTags={setSelectedTags}
           selectedTags={selectedTags}
         />
-        {displayQuestions()}
+        {loading ? <Loading/> : displayQuestions()}
         <button className="submit-btn" style={{marginLeft:0}} onClick={() => {  getPrev();}}>
           Prev
         </button>

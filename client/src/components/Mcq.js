@@ -6,6 +6,7 @@ import TagFilter from "./TagFilter.js";
 import searchImg from "../images/search.png";
 import { useState, useEffect } from "react";
 import Modal from "./Modal";
+import Loading from "./Loading";
 function intersection(array1, array2) {
   let a = array1.filter((value) => array2.includes(value));
   a = new Set(a);
@@ -20,6 +21,7 @@ const Mcq = () => {
   const [searchInp, setSearchInp] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [quesIndex, setQuesIndex] = useState(0);
+  const [loading,setLoading] = useState(false);
   async function getData() {
     let url = process.env.REACT_APP_ALL_CTYPE + "mcq";
     let p = new URLSearchParams();
@@ -66,6 +68,7 @@ const Mcq = () => {
     if (!search.has("skip") && !search.has("limit")) {
       setSearch({ skip: 0, limit: 5 });
     } else if (!lastpage) {
+      setLoading(true);
       getData().then((val) => {
         if (!val.status) {
           alert(val.result);
@@ -80,6 +83,10 @@ const Mcq = () => {
             alert("this is the last page");
           }
         }
+        setLoading(false);
+      }).catch((err)=>{
+        setLoading(false);
+        alert(err.message);
       });
     }
   }, [search]);
@@ -176,7 +183,7 @@ const Mcq = () => {
           updateSelectedTags={setSelectedTags}
           selectedTags={selectedTags}
         />
-        {displayMcqs()}
+        {loading? <Loading/> : displayMcqs()}
         <button
         className="submit-btn" style={{marginLeft:0}}
           onClick={() => {
