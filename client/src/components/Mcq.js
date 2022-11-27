@@ -40,7 +40,6 @@ const Mcq = () => {
       },
     });
     const data = await res.json();
-    console.log(data);
     if (res.status === 400) {
       return { status: false, result: data };
     }
