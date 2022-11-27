@@ -2,23 +2,11 @@
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
-import About from "./components/About";
-import Admin from "./components/Admin";
 import "./App.css";
-import ErrorPage from "./components/ErrorPage";
-import Logout from "./components/Logout";
 // import { initialState, reducer } from "./reducer/useReducer";
-import Coding from "./components/Coding";
-import Article from "./components/Article";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
-import Mcq from "./components/Mcq";
-import AdminLogin from "./components/AdminLogin";
-import AdminSignup from "./components/AdminSignup";
-import AdminHome from "./components/AdminHome";
-import AdminLogout from "./components/AdminLogout";
-import { useContext, useEffect } from "react";
+import { lazy, Suspense, useContext, useEffect } from "react";
 import UserContext from "./contexts/userContext";
+import Loading from "./components/Loading";
 //context Api
 // export const UserContext = createContext();
 
@@ -47,25 +35,37 @@ const App = () => {
   useEffect(() => {
     verifyToken();
   }, []);
+  const AboutRoute = lazy(()=>import("./components/About"));
+  const AdminRoute = lazy(()=>import("./components/Admin"));
+  const ArticleRoute = lazy(()=>import("./components/Article"));
+  const LoginRoute = lazy(()=>import("./components/Login"))
+  const SignUpRoute = lazy(()=>import("./components/SignUp"))
+  const LogoutRoute = lazy(()=>import("./components/Logout"))
+  const CodingRoute = lazy(()=>import("./components/Coding"))
+  const McqRoute = lazy(()=>import("./components/Mcq"));
+  const AdminSignupRoute = lazy(()=>import("./components/AdminSignup"))
+  const AdminHomeRoute = lazy(()=>import("./components/AdminHome"))
+  const AdminLoginRoute = lazy(()=>import("./components/AdminLogin"))
+  const AdminLogoutRoute = lazy(()=>import("./components/AdminLogout"))
+  const ErrorRoute = lazy(()=>import("./components/ErrorPage"))
   return (
     <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/article" element={<Article />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/coding" element={<Coding />} />
-        <Route path="/mcqs" element={<Mcq />} />
-        <Route path="/adminSignup" element={<AdminSignup />} />
-        <Route path="/adminHome" element={<AdminHome />} />
-        <Route path="/adminLogin" element={<AdminLogin />} />
-        <Route path="/adminSignout" element={<AdminLogout />} />
-        <Route path="/*" element={<ErrorPage />} />
+        <Route path="/about" element={<Suspense fallback={<Loading/>}><AboutRoute/></Suspense>} />
+        <Route path="/admin" element={<Suspense fallback={<Loading/>}><AdminRoute/></Suspense>} />
+        <Route path="/article" element={<Suspense fallback={<Loading/>}><ArticleRoute/></Suspense>} />
+        <Route path="/login" element={<Suspense fallback={<Loading/>}><LoginRoute/></Suspense>} />
+        <Route path="/signup" element={<Suspense fallback={<Loading/>}><SignUpRoute/></Suspense>} />
+        <Route path="/logout" element={<Suspense fallback={<Loading/>}><LogoutRoute/></Suspense>} />
+        <Route path="/coding" element={<Suspense fallback={<Loading/>}><CodingRoute/></Suspense>} />
+        <Route path="/mcqs" element={<Suspense fallback={<Loading/>}><McqRoute/></Suspense>} />
+        <Route path="/adminSignup" element={<Suspense fallback={<Loading/>}><AdminSignupRoute/></Suspense>} />
+        <Route path="/adminHome" element={<Suspense fallback={<Loading/>}><AdminHomeRoute/></Suspense>} />
+        <Route path="/adminLogin" element={<Suspense fallback={<Loading/>}><AdminLoginRoute/></Suspense>} />
+        <Route path="/adminSignout" element={<Suspense fallback={<Loading/>}><AdminLogoutRoute/></Suspense>} />
+        <Route path="/*" element={<Suspense fallback={<Loading/>}><ErrorRoute/></Suspense>} />
       </Routes>
     </>
   );
