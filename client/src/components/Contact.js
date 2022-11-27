@@ -14,33 +14,6 @@ const Contact = () => {
     phone: true,
     message: true,
   });
-  const userContact = async () => {
-    try {
-      const res = await fetch("http://localhost:5500/getdata", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      console.log(data);
-      setUserData({
-        ...userData,
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-      });
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  useEffect(() => {
-    userContact();
-  }, []);
 
   //we are storing data in states
 

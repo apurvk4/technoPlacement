@@ -19,7 +19,7 @@ const Navbar = () => {
           <div className="btn-group">
             <button
               type="button"
-              class={
+              className={
                 level === "user" && login
                   ? "btn dropdown-toggle nav-btn-active"
                   : "btn dropdown-toggle"
@@ -33,46 +33,46 @@ const Navbar = () => {
             >
               User
             </button>
-              <Dropdown r={adminLinks}>
-               <li>
+            <Dropdown r={adminLinks}>
+              <li>
                 <NavLink
-                   className="dropdown-item"
+                  className="dropdown-item"
                   style={{ borderRadius: 0 }}
                   to="/login"
                 >
-                User Login
+                  User Login
                 </NavLink>
               </li>
-            <li>
-              <NavLink
-               className="dropdown-item"
-               style={{ borderRadius: 0 }}
-               to="/signup"
-              >
-              User SignUp
-             </NavLink>
-            </li>
-           {level === "user" && login ? (
-             <li>
+              <li>
                 <NavLink
-                 className="dropdown-item"
-                 style={{ borderRadius: 0 }}
-                 to="/logout"
+                  className="dropdown-item"
+                  style={{ borderRadius: 0 }}
+                  to="/signup"
                 >
-                User Logout
-               </NavLink>
-            </li>
-          ) : (
-            ""
-          )}
-              </Dropdown>
+                  User SignUp
+                </NavLink>
+              </li>
+              {level === "user" && login ? (
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    style={{ borderRadius: 0 }}
+                    to="/logout"
+                  >
+                    User Logout
+                  </NavLink>
+                </li>
+              ) : (
+                ""
+              )}
+            </Dropdown>
           </div>
         </li>
         <li className="nav-item">
           <div className="btn-group">
             <button
               type="button"
-              class={
+              className={
                 level === "admin" && login
                   ? "btn dropdown-toggle nav-btn-active"
                   : "btn dropdown-toggle"
@@ -86,8 +86,8 @@ const Navbar = () => {
             >
               Admin
             </button>
-            <Dropdown  r={userLinks}>
-            {login && level === "admin" ? (
+            <Dropdown r={userLinks}>
+              {login && level === "admin" ? (
                 <li>
                   <NavLink
                     className="dropdown-item"

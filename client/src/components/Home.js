@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 // import AddCourse from "./AddCourse";
 // import Coding from "./Coding";
 // import Modal from "./Modal";
@@ -15,29 +15,6 @@ import projects from "../images/projects.png";
 import Categories from "./Categories";
 
 const Home = () => {
-  const [show, setShow] = useState(false);
-  const [userName, setUserName] = useState("");
-  const adminLinks = useRef(null);
-  const userHomePage = async () => {
-    try {
-      const res = await fetch("/getdata", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      console.log(data);
-      setUserName(data.name);
-      setShow(true);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  useEffect(() => {
-    userHomePage();
-  }, []);
-
   return (
     <>
       <div className="head-container">
