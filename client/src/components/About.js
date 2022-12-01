@@ -5,27 +5,25 @@ import ranupic from "../images/login.png";
 const About=()=>{
  const [userData, setUserData]= useState({});
   console.log("call about page me aaagayyaa");
-   const callAboutPage= async()=>{
-    
-     try{
+   const callAboutPage = async () => {
+     try {
        console.log("call about page me aaagayyaa");
-           const res= await fetch("/about", {
-             method: "GET",
-             headers:{
-              Accept:"application/json",
-              "Content-Type":"application/json"
-             },
-             credentials:"include"
-           });
-           const data=await res.json();
-           console.log(data);
-           setUserData(data);
-           if(!res.status===200){
-             const error= new Error(res.error);
-             throw error; 
-           }
-
-     }catch(e){
+       const res = await fetch("/about", {
+         method: "GET",
+         headers: {
+           Accept: "application/json",
+           "Content-Type": "application/json",
+         },
+         credentials: "include",
+       });
+       const data = await res.json();
+       console.log(data);
+       setUserData(data);
+       if (!res.status === 200) {
+         const error = new Error(res.error);
+         throw error;
+       }
+     } catch (e) {
        console.log(e);
      }
    };
