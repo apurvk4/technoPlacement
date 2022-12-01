@@ -16,7 +16,7 @@ function corsMiddleWare(req, res, next) {
     "https://techno-placement11.vercel.app"
   );
   res.removeHeader("X-powered-by");
-  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,PATCH,POST,DELETE");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,DELETE");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Headers", "content-type");
   if (req.method == "OPTIONS") {
