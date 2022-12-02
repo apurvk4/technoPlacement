@@ -1,17 +1,27 @@
 import React from 'react'
-import { Link } from "react-router-dom";
-import Coding from './Coding';
+import { createSearchParams, useNavigate } from "react-router-dom";
 
  
 const  Category=({item})=> {
+  const navigate = useNavigate();
   return (
     <>
-      <Link to={"/" + item.route}>
+      <a
+        onClick={() => {
+          navigate({
+            pathname: item.route,
+            search: createSearchParams({
+              skip: 0,
+              limit: 5,
+            }).toString(),
+          });
+        }}
+      >
         <div className="s-card">
           <img src={item.img} />
           <p>{item.title}</p>
         </div>
-      </Link>
+      </a>
     </>
   );
 }

@@ -64,29 +64,29 @@ const Coding = () => {
     }
   }
   useEffect(() => {
-    if (!search.has("skip") && !search.has("limit")) {
-      setSearch({ skip: 0, limit: 5 });
-    } else if (!lastpage) {
+    if (!lastpage) {
       setLoading(true);
-      getData().then((val) => {
-        if (!val.status) {
-          alert(val.result);
-        } else {
-          if (val.result["items"].length > 0) {
-            setQuestion(val.result);
+      getData()
+        .then((val) => {
+          if (!val.status) {
+            alert(val.result);
           } else {
-            setLastPage(true);
-            let s = parseInt(search.get("skip"));
-            let l = parseInt(search.get("limit"));
-            setSearch({ ...search, skip: s - l, limit: l });
-            alert("this is the last page");
+            if (val.result["items"].length > 0) {
+              setQuestion(val.result);
+            } else {
+              setLastPage(true);
+              let s = parseInt(search.get("skip"));
+              let l = parseInt(search.get("limit"));
+              setSearch({ ...search, skip: s - l, limit: l });
+              alert("this is the last page");
+            }
           }
-        }
-        setLoading(false);
-      }).catch((err)=>{
-        setLoading(false);
-        alert(err.message);
-      });
+          setLoading(false);
+        })
+        .catch((err) => {
+          setLoading(false);
+          alert(err.message);
+        });
     }
   }, [search]);
   useEffect(() => {
