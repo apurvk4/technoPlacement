@@ -7,7 +7,7 @@ import UserContext from "../contexts/userContext";
 import LangContext from "../contexts/langContext";
 const enums = ["c", "cpp", "python3", "java"];
 const Home = ({ theme, setTheme }) => {
-  // const { lang } = useParams();
+
   const [lang, setLang] = useSearchParams();
   const { setLanguage } = useContext(LangContext);
   const isDesktop = useMediaQuery("(min-width: 800px)");
