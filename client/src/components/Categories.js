@@ -29,10 +29,6 @@ const categories = [
     route: "playground",
   },
 ];
-  
-
-
-
 const Categories=()=> {
   return (
     <>
