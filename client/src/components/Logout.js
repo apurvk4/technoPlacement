@@ -15,7 +15,7 @@ const Logout = () => {
         },
       });
       if (res.status === 201) {
-        setLevel("none");
+        setLevel(undefined);
         setLogin(false);
         setData({});
         navigate("/");

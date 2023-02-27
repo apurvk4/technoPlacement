@@ -8,13 +8,19 @@ const  Category=({item})=> {
     <>
       <a
         onClick={() => {
-          navigate({
-            pathname: item.route,
-            search: createSearchParams({
-              skip: 0,
-              limit: 5,
-            }).toString(),
-          });
+          if (item.route != "playground") {
+            navigate({
+              pathname: item.route,
+              search: createSearchParams({
+                skip: 0,
+                limit: 5,
+              }).toString(),
+            });
+          } else {
+            navigate({
+              pathname: item.route,
+            });
+          }
         }}
       >
         <div className="s-card">

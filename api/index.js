@@ -11,10 +11,7 @@ const jwt = require("jsonwebtoken");
 const User = require("./model/userSchema");
 const Admin = require("./model/adminSchema");
 function corsMiddleWare(req, res, next) {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://techno-placement11.vercel.app"
-  );
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.removeHeader("X-powered-by");
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,DELETE");
   res.setHeader("Access-Control-Allow-Credentials", "true");

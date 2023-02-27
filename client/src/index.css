@@ -18,3 +18,128 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.editor{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    height: 100%;
+}
+.text-editor{
+    width: 100%;
+    height: 100vh;
+}
+@media screen and (min-width: 800px) {
+    .editor{
+        width: 50%;
+    }
+    .text-editor{
+        width: 50%;
+    }
+}
+.editor-header{
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border:1px solid rgba(0,0,0,0.125);
+}
+.file-name{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13px;
+  border:1px solid rgba(0,0,0,0.125);
+  border-bottom:0px ;
+}
+.file-name.dark{
+  border: 1px solid rgb(52,56,58);
+  border-bottom: 0px;
+}
+.editor-btns{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width:189px;
+  margin-right:-6px;
+}
+.darkmode{
+  margin-right: 20px;
+}
+.run{
+  background-color: blue;
+  min-width: 67px;
+  height: 32px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border-radius: 10px;
+}
+
+
+.themebutton {
+  border-radius: 20px;
+}
+ .themebutton.dark-mode {
+ background-color: black;
+ border-color: #141414;
+}
+.themebutton.light-mode {
+  background-color: white;
+  border: 1px solid #c6c6c6;
+}
+.themebutton:focus {
+  outline: none;
+}
+.sidebar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin:5px;
+}
+.sidebar-button{
+  cursor:pointer;
+}
+.sidebar-item{
+  margin: 5px;
+}
+.output{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: 100%;
+}
+.output-result,.output-inp{
+  display: flex;
+  border:1px solid rgba(0,0,0,0.125);
+  height: 50vh;
+}
+@media screen and (min-width: 800px) {
+  .output{
+      width: 50%;
+  }
+  /* .output-result,.output-inp{
+  } */
+}
+.container11{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+.header11{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 100%;
+  padding:5px;
+}
+.row{
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 50%;
+  justify-content: flex-end;
+  align-items: center;
+}
